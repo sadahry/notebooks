@@ -1,0 +1,1287 @@
+{
+  "paragraphs": [
+    {
+      "text": "// place of /spark-scala-examples\nval baseDir \u003d \"/Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/\"\nval resourcesDir \u003d baseDir + \"src/main/resources/\"\nval csvDir \u003d resourcesDir + \"csv/\"\nval storageDir \u003d \"/Users/sadahiroyoshi/Documents/apps/sandbox/spark-sql-tutorial/\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 01:25:17.109",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mbaseDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/\n\u001b[1m\u001b[34mresourcesDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/\n\u001b[1m\u001b[34mcsvDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/csv/\n\u001b[1m\u001b[34mstorageDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/sandbox/spark-sql-tutorial/\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633796701328_1043144707",
+      "id": "paragraph_1633796701328_1043144707",
+      "dateCreated": "2021-10-10 01:25:01.328",
+      "dateStarted": "2021-10-10 01:25:17.121",
+      "dateFinished": "2021-10-10 01:25:19.690",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/different-ways-to-create-a-spark-dataframe/\n\nprintln(\"dfCsv\")\nval dfCsv \u003d spark.read.option(\"header\",\"true\").csv(resourcesDir + \"/kv.csv\")\ndfCsv.show()\n\nprintln(\"dfText\")\nval dfText \u003d spark.read.text(resourcesDir + \"test.txt\")\ndfText.show()\n\nprintln(\"dfJson\")\nval dfJson \u003d spark.read.json(resourcesDir + \"simple_zipcodes.json\")\ndfJson.show()\n\n// need to add dependency\n// https://sparkbyexamples.com/spark/spark-read-write-xml/\n// println(\"dfXml\")\n// val dfXml \u003d spark.read\n//       .format(\"com.databricks.spark.xml\")\n//       .option(\"rowTag\", \"person\")\n//       .xml(resourcesDir + \"persons.xml\")\n// dfXml.show()\n      ",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 01:42:26.751",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "dfCsv\n+-------+------------------+\n|    key|             value|\n+-------+------------------+\n|record1| My Name is Naveen|\n|record2|My Name is Praveen|\n|record3| My Name is Prabha|\n+-------+------------------+\n\ndfText\n+--------------------+\n|               value|\n+--------------------+\n| Project Gutenberg’s|\n|Alice’s Adventure...|\n|    by Lewis Carroll|\n|This eBook is for...|\n|  of anyone anywhere|\n| at no cost and with|\n|Alice’s Adventure...|\n|    by Lewis Carroll|\n|This eBook is for...|\n|  of anyone anywhere|\n| at no cost and with|\n|This eBook is for...|\n|  of anyone anywhere|\n| at no cost and with|\n| Project Gutenberg’s|\n|Alice’s Adventure...|\n|    by Lewis Carroll|\n|This eBook is for...|\n|  of anyone anywhere|\n| at no cost and with|\n+--------------------+\nonly showing top 20 rows\n\ndfJson\n+-------------------+-----+-----------+-------+\n|               City|State|ZipCodeType|Zipcode|\n+-------------------+-----+-----------+-------+\n|        PARC PARQUE|   PR|   STANDARD|    704|\n|PASEO COSTA DEL SUR|   PR|   STANDARD|    704|\n|       BDA SAN LUIS|   PR|   STANDARD|    709|\n|  CINGULAR WIRELESS|   TX|     UNIQUE|  76166|\n|         FORT WORTH|   TX|   STANDARD|  76177|\n|           FT WORTH|   TX|   STANDARD|  76177|\n|    URB EUGENE RICE|   PR|   STANDARD|    704|\n|               MESA|   AZ|   STANDARD|  85209|\n|               MESA|   AZ|   STANDARD|  85210|\n|           HILLIARD|   FL|   STANDARD|  32046|\n+-------------------+-----+-----------+-------+\n\n\u001b[1m\u001b[34mdfCsv\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [key: string, value: string]\n\u001b[1m\u001b[34mdfText\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [value: string]\n\u001b[1m\u001b[34mdfJson\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [City: string, State: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d460"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d461"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d462"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d463"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d464"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633796501813_1535279715",
+      "id": "paragraph_1633796501813_1535279715",
+      "dateCreated": "2021-10-10 01:21:41.814",
+      "dateStarted": "2021-10-10 01:42:26.767",
+      "dateFinished": "2021-10-10 01:42:31.168",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-select-columns-from-dataframe/\n\nval data \u003d Seq((\"James\",\"Smith\",\"USA\",\"CA\"),\n  (\"Michael\",\"Rose\",\"USA\",\"NY\"),\n  (\"Robert\",\"Williams\",\"USA\",\"CA\"),\n  (\"Maria\",\"Jones\",\"USA\",\"FL\")\n  )\n\nval columns \u003d Seq(\"firstname\",\"lastname\",\"country\",\"state\")\nimport spark.implicits._\n\nval df \u003d data.toDF(columns:_*)\ndf.show(false)\n\ndf.select(\"firstname\",\"lastname\").show()\n\n//Using Dataframe object name\ndf.select(df(\"firstname\"),df(\"lastname\")).show()\n\n//Using col function, use alias() to get alias name\nimport org.apache.spark.sql.functions.col\ndf.select(col(\"firstname\").alias(\"fname\"),col(\"lastname\")).show()\n\nval listCols\u003d List(\"lastname\",\"country\")\ndf.select(listCols.map(m\u003d\u003ecol(m)):_*).show()\n\n//Selects 4th column (index starts from zero)\ndf.select(df.columns(3)).show()\n//Selects columns from index 2 to 4\ndf.select(df.columns.slice(2,4).map(m\u003d\u003ecol(m)):_*).show()\n\n//Select columns by regular expression\ndf.select(df.colRegex(\"`^.*name*`\")).show()\n\ndf.select(df.columns.filter(f\u003d\u003ef.startsWith(\"first\")).map(m\u003d\u003ecol(m)):_*)\ndf.select(df.columns.filter(f\u003d\u003ef.endsWith(\"name\")).map(m\u003d\u003ecol(m)):_*)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 01:46:45.700",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+--------+-------+-----+\n|firstname|lastname|country|state|\n+---------+--------+-------+-----+\n|James    |Smith   |USA    |CA   |\n|Michael  |Rose    |USA    |NY   |\n|Robert   |Williams|USA    |CA   |\n|Maria    |Jones   |USA    |FL   |\n+---------+--------+-------+-----+\n\n+---------+--------+\n|firstname|lastname|\n+---------+--------+\n|    James|   Smith|\n|  Michael|    Rose|\n|   Robert|Williams|\n|    Maria|   Jones|\n+---------+--------+\n\n+---------+--------+\n|firstname|lastname|\n+---------+--------+\n|    James|   Smith|\n|  Michael|    Rose|\n|   Robert|Williams|\n|    Maria|   Jones|\n+---------+--------+\n\n+-------+--------+\n|  fname|lastname|\n+-------+--------+\n|  James|   Smith|\n|Michael|    Rose|\n| Robert|Williams|\n|  Maria|   Jones|\n+-------+--------+\n\n+--------+-------+\n|lastname|country|\n+--------+-------+\n|   Smith|    USA|\n|    Rose|    USA|\n|Williams|    USA|\n|   Jones|    USA|\n+--------+-------+\n\n+-----+\n|state|\n+-----+\n|   CA|\n|   NY|\n|   CA|\n|   FL|\n+-----+\n\n+-------+-----+\n|country|state|\n+-------+-----+\n|    USA|   CA|\n|    USA|   NY|\n|    USA|   CA|\n|    USA|   FL|\n+-------+-----+\n\n+---------+--------+\n|firstname|lastname|\n+---------+--------+\n|    James|   Smith|\n|  Michael|    Rose|\n|   Robert|Williams|\n|    Maria|   Jones|\n+---------+--------+\n\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String, String, String)]\u001b[0m \u003d List((James,Smith,USA,CA), (Michael,Rose,USA,NY), (Robert,Williams,USA,CA), (Maria,Jones,USA,FL))\n\u001b[1m\u001b[34mcolumns\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(firstname, lastname, country, state)\nimport spark.implicits._\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [firstname: string, lastname: string ... 2 more fields]\nimport org.apache.spark.sql.functions.col\n\u001b[1m\u001b[34mlistCols\u001b[0m: \u001b[1m\u001b[32mList[String]\u001b[0m \u003d List(lastname, country)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633796769889_1185045141",
+      "id": "paragraph_1633796769889_1185045141",
+      "dateCreated": "2021-10-10 01:26:09.890",
+      "dateStarted": "2021-10-10 01:46:29.563",
+      "dateFinished": "2021-10-10 01:46:33.182",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-select-columns-from-dataframe/\n//part2\n\n//Show Nested columns\nimport org.apache.spark.sql.types.{StringType, StructType}\nval data2 \u003d Seq(Row(Row(\"James\",\"\",\"Smith\"),\"OH\",\"M\"),\n    Row(Row(\"Anna\",\"Rose\",\"\"),\"NY\",\"F\"),\n    Row(Row(\"Julia\",\"\",\"Williams\"),\"OH\",\"F\"),\n    Row(Row(\"Maria\",\"Anne\",\"Jones\"),\"NY\",\"M\"),\n    Row(Row(\"Jen\",\"Mary\",\"Brown\"),\"NY\",\"M\"),\n    Row(Row(\"Mike\",\"Mary\",\"Williams\"),\"OH\",\"M\")\n)\n\nval schema \u003d new StructType()\n    .add(\"name\",new StructType()\n      .add(\"firstname\",StringType)\n      .add(\"middlename\",StringType)\n      .add(\"lastname\",StringType))\n    .add(\"state\",StringType)\n    .add(\"gender\",StringType)\n\nval df2 \u003d spark.createDataFrame(\n    spark.sparkContext.parallelize(data2),schema)\ndf2.printSchema()\ndf2.show(false)\n\ndf2.select(\"name\").show(false)\n\ndf2.select(\"name.firstname\",\"name.lastname\").show(false)\n\ndf2.select(\"name.*\").show(false)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 01:47:56.238",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- name: struct (nullable \u003d true)\n |    |-- firstname: string (nullable \u003d true)\n |    |-- middlename: string (nullable \u003d true)\n |    |-- lastname: string (nullable \u003d true)\n |-- state: string (nullable \u003d true)\n |-- gender: string (nullable \u003d true)\n\n+----------------------+-----+------+\n|name                  |state|gender|\n+----------------------+-----+------+\n|{James, , Smith}      |OH   |M     |\n|{Anna, Rose, }        |NY   |F     |\n|{Julia, , Williams}   |OH   |F     |\n|{Maria, Anne, Jones}  |NY   |M     |\n|{Jen, Mary, Brown}    |NY   |M     |\n|{Mike, Mary, Williams}|OH   |M     |\n+----------------------+-----+------+\n\n+----------------------+\n|name                  |\n+----------------------+\n|{James, , Smith}      |\n|{Anna, Rose, }        |\n|{Julia, , Williams}   |\n|{Maria, Anne, Jones}  |\n|{Jen, Mary, Brown}    |\n|{Mike, Mary, Williams}|\n+----------------------+\n\n+---------+--------+\n|firstname|lastname|\n+---------+--------+\n|James    |Smith   |\n|Anna     |        |\n|Julia    |Williams|\n|Maria    |Jones   |\n|Jen      |Brown   |\n|Mike     |Williams|\n+---------+--------+\n\n+---------+----------+--------+\n|firstname|middlename|lastname|\n+---------+----------+--------+\n|James    |          |Smith   |\n|Anna     |Rose      |        |\n|Julia    |          |Williams|\n|Maria    |Anne      |Jones   |\n|Jen      |Mary      |Brown   |\n|Mike     |Mary      |Williams|\n+---------+----------+--------+\n\nimport org.apache.spark.sql.types.{StringType, StructType}\n\u001b[1m\u001b[34mdata2\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([[James,,Smith],OH,M], [[Anna,Rose,],NY,F], [[Julia,,Williams],OH,F], [[Maria,Anne,Jones],NY,M], [[Jen,Mary,Brown],NY,M], [[Mike,Mary,Williams],OH,M])\n\u001b[1m\u001b[34mschema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StructType(StructField(firstname,StringType,true), StructField(middlename,StringType,true), StructField(lastname,StringType,true)),true), StructField(state,StringType,true), StructField(gender,StringType,true))\n\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [name: struct\u003cfirstname: string, middlename: string ... 1 more field\u003e, state: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d474"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d475"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d476"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d477"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d478"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d479"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d480"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d481"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d482"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d483"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d484"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d485"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633797804908_366355575",
+      "id": "paragraph_1633797804908_366355575",
+      "dateCreated": "2021-10-10 01:43:24.918",
+      "dateStarted": "2021-10-10 01:47:56.250",
+      "dateFinished": "2021-10-10 01:48:01.750",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-dataframe-withcolumn/\n\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.types.{StringType, StructType} \nval data \u003d Seq(Row(Row(\"James;\",\"\",\"Smith\"),\"36636\",\"M\",\"3000\"),\n      Row(Row(\"Michael\",\"Rose\",\"\"),\"40288\",\"M\",\"4000\"),\n      Row(Row(\"Robert\",\"\",\"Williams\"),\"42114\",\"M\",\"4000\"),\n      Row(Row(\"Maria\",\"Anne\",\"Jones\"),\"39192\",\"F\",\"4000\"),\n      Row(Row(\"Jen\",\"Mary\",\"Brown\"),\"\",\"F\",\"-1\")\n)\n\nval schema \u003d new StructType()\n      .add(\"name\",new StructType()\n      .add(\"firstname\",StringType)\n      .add(\"middlename\",StringType)\n      .add(\"lastname\",StringType))\n      .add(\"dob\",StringType)\n      .add(\"gender\",StringType)\n      .add(\"salary\",StringType)\n\nval df \u003d spark.createDataFrame(spark.sparkContext.parallelize(data),schema)\n\nprintln(\"add column\")\nimport org.apache.spark.sql.functions.lit\ndf.withColumn(\"Country\", lit(\"USA\")).show()\n\nprintln(\"add column chaining\")\n//chaining to operate on multiple columns\ndf.withColumn(\"Country\", lit(\"USA\"))\n   .withColumn(\"anotherColumn\",lit(\"anotherValue\")).show()\n\nprintln(\"update column\")\nimport org.apache.spark.sql.functions.col\ndf.withColumn(\"salary\",col(\"salary\")*100).show()\n\nprintln(\"add column copy\")\ndf.withColumn(\"CopiedColumn\",col(\"salary\")* -1).show()\n\nprintln(\"change col data type\")\ndf.withColumn(\"salary\",col(\"salary\").cast(\"Integer\")).show()\n\nprintln(\"table updation\")\nval df2 \u003d df.withColumn(\"CopiedColumn\",col(\"salary\")* -1)\ndf2.createOrReplaceTempView(\"PERSON\")\nspark.sql(\"SELECT salary*100 as salary, salary*-1 as CopiedColumn, \u0027USA\u0027 as country FROM PERSON\").show()\n\nprintln(\"rename column\")\ndf.withColumnRenamed(\"gender\",\"sex\").show()\n\nprintln(\"drop column\")\ndf.drop(\"salary\").show()\n\nprintln(\"split column\")\nimport spark.implicits._\n\nval columns \u003d Seq(\"name\",\"address\")\nval data4Split \u003d Seq((\"Robert, Smith\", \"1 Main st, Newark, NJ, 92537\"),\n             (\"Maria, Garcia\",\"3456 Walnut st, Newark, NJ, 94732\"))\nvar dfFromData \u003d spark.createDataFrame(data4Split).toDF(columns:_*)\ndfFromData.printSchema()\n\nval newDF \u003d dfFromData.map(f\u003d\u003e{\nval nameSplit \u003d f.getAs[String](0).split(\",\")\nval addSplit \u003d f.getAs[String](1).split(\",\")\n      (nameSplit(0),nameSplit(1),addSplit(0),addSplit(1),addSplit(2),addSplit(3))\n    })\nval finalDF \u003d newDF.toDF(\"First Name\",\"Last Name\",\n             \"Address Line1\",\"City\",\"State\",\"zipCode\")\nfinalDF.printSchema()\nfinalDF.show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 01:59:28.391",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "add column\n+--------------------+-----+------+------+-------+\n|                name|  dob|gender|salary|Country|\n+--------------------+-----+------+------+-------+\n|   {James;, , Smith}|36636|     M|  3000|    USA|\n|   {Michael, Rose, }|40288|     M|  4000|    USA|\n|{Robert, , Williams}|42114|     M|  4000|    USA|\n|{Maria, Anne, Jones}|39192|     F|  4000|    USA|\n|  {Jen, Mary, Brown}|     |     F|    -1|    USA|\n+--------------------+-----+------+------+-------+\n\nadd column chaining\n+--------------------+-----+------+------+-------+-------------+\n|                name|  dob|gender|salary|Country|anotherColumn|\n+--------------------+-----+------+------+-------+-------------+\n|   {James;, , Smith}|36636|     M|  3000|    USA| anotherValue|\n|   {Michael, Rose, }|40288|     M|  4000|    USA| anotherValue|\n|{Robert, , Williams}|42114|     M|  4000|    USA| anotherValue|\n|{Maria, Anne, Jones}|39192|     F|  4000|    USA| anotherValue|\n|  {Jen, Mary, Brown}|     |     F|    -1|    USA| anotherValue|\n+--------------------+-----+------+------+-------+-------------+\n\nupdate column\n+--------------------+-----+------+--------+\n|                name|  dob|gender|  salary|\n+--------------------+-----+------+--------+\n|   {James;, , Smith}|36636|     M|300000.0|\n|   {Michael, Rose, }|40288|     M|400000.0|\n|{Robert, , Williams}|42114|     M|400000.0|\n|{Maria, Anne, Jones}|39192|     F|400000.0|\n|  {Jen, Mary, Brown}|     |     F|  -100.0|\n+--------------------+-----+------+--------+\n\nadd column copy\n+--------------------+-----+------+------+------------+\n|                name|  dob|gender|salary|CopiedColumn|\n+--------------------+-----+------+------+------------+\n|   {James;, , Smith}|36636|     M|  3000|     -3000.0|\n|   {Michael, Rose, }|40288|     M|  4000|     -4000.0|\n|{Robert, , Williams}|42114|     M|  4000|     -4000.0|\n|{Maria, Anne, Jones}|39192|     F|  4000|     -4000.0|\n|  {Jen, Mary, Brown}|     |     F|    -1|         1.0|\n+--------------------+-----+------+------+------------+\n\nchange col data type\n+--------------------+-----+------+------+\n|                name|  dob|gender|salary|\n+--------------------+-----+------+------+\n|   {James;, , Smith}|36636|     M|  3000|\n|   {Michael, Rose, }|40288|     M|  4000|\n|{Robert, , Williams}|42114|     M|  4000|\n|{Maria, Anne, Jones}|39192|     F|  4000|\n|  {Jen, Mary, Brown}|     |     F|    -1|\n+--------------------+-----+------+------+\n\ntable updation\n+--------+------------+-------+\n|  salary|CopiedColumn|country|\n+--------+------------+-------+\n|300000.0|     -3000.0|    USA|\n|400000.0|     -4000.0|    USA|\n|400000.0|     -4000.0|    USA|\n|400000.0|     -4000.0|    USA|\n|  -100.0|         1.0|    USA|\n+--------+------------+-------+\n\nrename column\n+--------------------+-----+---+------+\n|                name|  dob|sex|salary|\n+--------------------+-----+---+------+\n|   {James;, , Smith}|36636|  M|  3000|\n|   {Michael, Rose, }|40288|  M|  4000|\n|{Robert, , Williams}|42114|  M|  4000|\n|{Maria, Anne, Jones}|39192|  F|  4000|\n|  {Jen, Mary, Brown}|     |  F|    -1|\n+--------------------+-----+---+------+\n\ndrop column\n+--------------------+-----+------+\n|                name|  dob|gender|\n+--------------------+-----+------+\n|   {James;, , Smith}|36636|     M|\n|   {Michael, Rose, }|40288|     M|\n|{Robert, , Williams}|42114|     M|\n|{Maria, Anne, Jones}|39192|     F|\n|  {Jen, Mary, Brown}|     |     F|\n+--------------------+-----+------+\n\nsplit column\nroot\n |-- name: string (nullable \u003d true)\n |-- address: string (nullable \u003d true)\n\nroot\n |-- First Name: string (nullable \u003d true)\n |-- Last Name: string (nullable \u003d true)\n |-- Address Line1: string (nullable \u003d true)\n |-- City: string (nullable \u003d true)\n |-- State: string (nullable \u003d true)\n |-- zipCode: string (nullable \u003d true)\n\n+----------+---------+--------------+-------+-----+-------+\n|First Name|Last Name|Address Line1 |City   |State|zipCode|\n+----------+---------+--------------+-------+-----+-------+\n|Robert    | Smith   |1 Main st     | Newark| NJ  | 92537 |\n|Maria     | Garcia  |3456 Walnut st| Newark| NJ  | 94732 |\n+----------+---------+--------------+-------+-----+-------+\n\nimport org.apache.spark.sql.{Row, SparkSession}\nimport org.apache.spark.sql.types.{StringType, StructType}\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([[James;,,Smith],36636,M,3000], [[Michael,Rose,],40288,M,4000], [[Robert,,Williams],42114,M,4000], [[Maria,Anne,Jones],39192,F,4000], [[Jen,Mary,Brown],,F,-1])\n\u001b[1m\u001b[34mschema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StructType(StructField(firstname,StringType,true), StructField(middlename,StringType,true), StructField(lastname,StringType,true)),true), StructField(dob,StringType,true), StructField(gender,StringType,true), StructField(salary,StringType,true))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [name: struct\u003cfirstname: string, middlename: strin...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d620"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d621"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d622"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d623"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d624"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d625"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d626"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d627"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d628"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d629"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d630"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d631"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d632"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d633"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d634"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d635"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d636"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d637"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d638"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d639"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d640"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d641"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d642"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d643"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d644"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d645"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633798062820_1811245012",
+      "id": "paragraph_1633798062820_1811245012",
+      "dateCreated": "2021-10-10 01:47:42.821",
+      "dateStarted": "2021-10-10 01:59:28.401",
+      "dateFinished": "2021-10-10 01:59:37.332",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/rename-a-column-on-spark-dataframes/\n\nval data \u003d Seq(Row(Row(\"James \",\"\",\"Smith\"),\"36636\",\"M\",3000),\n  Row(Row(\"Michael \",\"Rose\",\"\"),\"40288\",\"M\",4000),\n  Row(Row(\"Robert \",\"\",\"Williams\"),\"42114\",\"M\",4000),\n  Row(Row(\"Maria \",\"Anne\",\"Jones\"),\"39192\",\"F\",4000),\n  Row(Row(\"Jen\",\"Mary\",\"Brown\"),\"\",\"F\",-1)\n)\n\nval schema \u003d new StructType()\n  .add(\"name\",new StructType()\n    .add(\"firstname\",StringType)\n    .add(\"middlename\",StringType)\n    .add(\"lastname\",StringType))\n  .add(\"dob\",StringType)\n  .add(\"gender\",StringType)\n  .add(\"salary\",IntegerType)\n  \nval df \u003d spark.createDataFrame(spark.sparkContext.parallelize(data),schema)\ndf.printSchema()\n\nval schema2 \u003d new StructType()\n    .add(\"fname\",StringType)\n    .add(\"middlename\",StringType)\n    .add(\"lname\",StringType)\n\ndf.select(col(\"name\").cast(schema2),\n  col(\"dob\"),\n  col(\"gender\"),\n  col(\"salary\"))\n    .printSchema()\n\ndf.select(col(\"name.firstname\").as(\"fname\"),\n  col(\"name.middlename\").as(\"mname\"),\n  col(\"name.lastname\").as(\"lname\"),\n  col(\"dob\"),col(\"gender\"),col(\"salary\"))\n  .printSchema()\n\nval df4 \u003d df.withColumn(\"fname\",col(\"name.firstname\"))\n      .withColumn(\"mname\",col(\"name.middlename\"))\n      .withColumn(\"lname\",col(\"name.lastname\"))\n      .drop(\"name\")\ndf4.printSchema()\n\nval old_columns \u003d Seq(\"dob\",\"gender\",\"salary\",\"fname\",\"mname\",\"lname\")\nval new_columns \u003d Seq(\"DateOfBirth\",\"Sex\",\"salary\",\"firstName\",\"middleName\",\"lastName\")\nval columnsList \u003d old_columns.zip(new_columns).map(f\u003d\u003e{col(f._1).as(f._2)})\nval df5 \u003d df4.select(columnsList:_*)\ndf5.printSchema()\ndf5.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 02:04:39.127",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- name: struct (nullable \u003d true)\n |    |-- firstname: string (nullable \u003d true)\n |    |-- middlename: string (nullable \u003d true)\n |    |-- lastname: string (nullable \u003d true)\n |-- dob: string (nullable \u003d true)\n |-- gender: string (nullable \u003d true)\n |-- salary: integer (nullable \u003d true)\n\nroot\n |-- name: struct (nullable \u003d true)\n |    |-- fname: string (nullable \u003d true)\n |    |-- middlename: string (nullable \u003d true)\n |    |-- lname: string (nullable \u003d true)\n |-- dob: string (nullable \u003d true)\n |-- gender: string (nullable \u003d true)\n |-- salary: integer (nullable \u003d true)\n\nroot\n |-- fname: string (nullable \u003d true)\n |-- mname: string (nullable \u003d true)\n |-- lname: string (nullable \u003d true)\n |-- dob: string (nullable \u003d true)\n |-- gender: string (nullable \u003d true)\n |-- salary: integer (nullable \u003d true)\n\nroot\n |-- dob: string (nullable \u003d true)\n |-- gender: string (nullable \u003d true)\n |-- salary: integer (nullable \u003d true)\n |-- fname: string (nullable \u003d true)\n |-- mname: string (nullable \u003d true)\n |-- lname: string (nullable \u003d true)\n\nroot\n |-- DateOfBirth: string (nullable \u003d true)\n |-- Sex: string (nullable \u003d true)\n |-- salary: integer (nullable \u003d true)\n |-- firstName: string (nullable \u003d true)\n |-- middleName: string (nullable \u003d true)\n |-- lastName: string (nullable \u003d true)\n\n+-----------+---+------+---------+----------+--------+\n|DateOfBirth|Sex|salary|firstName|middleName|lastName|\n+-----------+---+------+---------+----------+--------+\n|      36636|  M|  3000|   James |          |   Smith|\n|      40288|  M|  4000| Michael |      Rose|        |\n|      42114|  M|  4000|  Robert |          |Williams|\n|      39192|  F|  4000|   Maria |      Anne|   Jones|\n|           |  F|    -1|      Jen|      Mary|   Brown|\n+-----------+---+------+---------+----------+--------+\n\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([[James ,,Smith],36636,M,3000], [[Michael ,Rose,],40288,M,4000], [[Robert ,,Williams],42114,M,4000], [[Maria ,Anne,Jones],39192,F,4000], [[Jen,Mary,Brown],,F,-1])\n\u001b[1m\u001b[34mschema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StructType(StructField(firstname,StringType,true), StructField(middlename,StringType,true), StructField(lastname,StringType,true)),true), StructField(dob,StringType,true), StructField(gender,StringType,true), StructField(salary,IntegerType,true))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [name: struct\u003cfirstname: string, middlename: string ... 1 more field\u003e, dob: string ... 2 more fields]\n\u001b[1m\u001b[34mschema2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d646"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d647"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d648"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633798232208_1578628743",
+      "id": "paragraph_1633798232208_1578628743",
+      "dateCreated": "2021-10-10 01:50:32.209",
+      "dateStarted": "2021-10-10 02:04:39.131",
+      "dateFinished": "2021-10-10 02:04:41.460",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-dataframe-where-filter/\n\nval arrayStructureData \u003d Seq(\nRow(Row(\"James\",\"\",\"Smith\"),List(\"Java\",\"Scala\",\"C++\"),\"OH\",\"M\"),\nRow(Row(\"Anna\",\"Rose\",\"\"),List(\"Spark\",\"Java\",\"C++\"),\"NY\",\"F\"),\nRow(Row(\"Julia\",\"\",\"Williams\"),List(\"CSharp\",\"VB\"),\"OH\",\"F\"),\nRow(Row(\"Maria\",\"Anne\",\"Jones\"),List(\"CSharp\",\"VB\"),\"NY\",\"M\"),\nRow(Row(\"Jen\",\"Mary\",\"Brown\"),List(\"CSharp\",\"VB\"),\"NY\",\"M\"),\nRow(Row(\"Mike\",\"Mary\",\"Williams\"),List(\"Python\",\"VB\"),\"OH\",\"M\")\n)\n\nval arrayStructureSchema \u003d new StructType()\n.add(\"name\",new StructType()\n  .add(\"firstname\",StringType)\n  .add(\"middlename\",StringType)\n  .add(\"lastname\",StringType))\n.add(\"languages\", ArrayType(StringType))\n.add(\"state\", StringType)\n.add(\"gender\", StringType)\n\nval df \u003d spark.createDataFrame(\nspark.sparkContext.parallelize(arrayStructureData),arrayStructureSchema)\ndf.printSchema()\ndf.show()\n\n//Condition\ndf.filter(df(\"state\") \u003d\u003d\u003d \"OH\")\n.show(false)\n\n//SQL Expression\ndf.filter(\"gender \u003d\u003d \u0027M\u0027\")\n.show(false)\n\n//multiple condition\ndf.filter(df(\"state\") \u003d\u003d\u003d \"OH\" \u0026\u0026 df(\"gender\") \u003d\u003d\u003d \"M\")\n.show(false)\n\n//Array condition\ndf.filter(array_contains(df(\"languages\"),\"Java\"))\n.show(false)\n\n//Struct condition\ndf.filter(df(\"name.lastname\") \u003d\u003d\u003d \"Williams\")\n.show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 02:10:16.349",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- name: struct (nullable \u003d true)\n |    |-- firstname: string (nullable \u003d true)\n |    |-- middlename: string (nullable \u003d true)\n |    |-- lastname: string (nullable \u003d true)\n |-- languages: array (nullable \u003d true)\n |    |-- element: string (containsNull \u003d true)\n |-- state: string (nullable \u003d true)\n |-- gender: string (nullable \u003d true)\n\n+--------------------+------------------+-----+------+\n|                name|         languages|state|gender|\n+--------------------+------------------+-----+------+\n|    {James, , Smith}|[Java, Scala, C++]|   OH|     M|\n|      {Anna, Rose, }|[Spark, Java, C++]|   NY|     F|\n| {Julia, , Williams}|      [CSharp, VB]|   OH|     F|\n|{Maria, Anne, Jones}|      [CSharp, VB]|   NY|     M|\n|  {Jen, Mary, Brown}|      [CSharp, VB]|   NY|     M|\n|{Mike, Mary, Will...|      [Python, VB]|   OH|     M|\n+--------------------+------------------+-----+------+\n\n+----------------------+------------------+-----+------+\n|name                  |languages         |state|gender|\n+----------------------+------------------+-----+------+\n|{James, , Smith}      |[Java, Scala, C++]|OH   |M     |\n|{Julia, , Williams}   |[CSharp, VB]      |OH   |F     |\n|{Mike, Mary, Williams}|[Python, VB]      |OH   |M     |\n+----------------------+------------------+-----+------+\n\n+----------------------+------------------+-----+------+\n|name                  |languages         |state|gender|\n+----------------------+------------------+-----+------+\n|{James, , Smith}      |[Java, Scala, C++]|OH   |M     |\n|{Maria, Anne, Jones}  |[CSharp, VB]      |NY   |M     |\n|{Jen, Mary, Brown}    |[CSharp, VB]      |NY   |M     |\n|{Mike, Mary, Williams}|[Python, VB]      |OH   |M     |\n+----------------------+------------------+-----+------+\n\n+----------------------+------------------+-----+------+\n|name                  |languages         |state|gender|\n+----------------------+------------------+-----+------+\n|{James, , Smith}      |[Java, Scala, C++]|OH   |M     |\n|{Mike, Mary, Williams}|[Python, VB]      |OH   |M     |\n+----------------------+------------------+-----+------+\n\n+----------------+------------------+-----+------+\n|name            |languages         |state|gender|\n+----------------+------------------+-----+------+\n|{James, , Smith}|[Java, Scala, C++]|OH   |M     |\n|{Anna, Rose, }  |[Spark, Java, C++]|NY   |F     |\n+----------------+------------------+-----+------+\n\n+----------------------+------------+-----+------+\n|name                  |languages   |state|gender|\n+----------------------+------------+-----+------+\n|{Julia, , Williams}   |[CSharp, VB]|OH   |F     |\n|{Mike, Mary, Williams}|[Python, VB]|OH   |M     |\n+----------------------+------------+-----+------+\n\n\u001b[1m\u001b[34marrayStructureData\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([[James,,Smith],List(Java, Scala, C++),OH,M], [[Anna,Rose,],List(Spark, Java, C++),NY,F], [[Julia,,Williams],List(CSharp, VB),OH,F], [[Maria,Anne,Jones],List(CSharp, VB),NY,M], [[Jen,Mary,Brown],List(CSharp, VB),NY,M], [[Mike,Mary,Williams],List(Python, VB),OH,M])\n\u001b[1m\u001b[34marrayStructureSchema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StructType(StructField(firstname,StringType,true), StructField(middlename,StringType,true), StructField(lastname,StringType,true)),true), StructField(languages,ArrayType(StringType,true),true), StructField(state,StringType,true), StructField(gender,StringType,true))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [na...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d649"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d650"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d651"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d652"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d653"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d654"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d655"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d656"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d657"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d658"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d659"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d660"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d661"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d662"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d663"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d664"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d665"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d666"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633798963295_791513583",
+      "id": "paragraph_1633798963295_791513583",
+      "dateCreated": "2021-10-10 02:02:43.302",
+      "dateStarted": "2021-10-10 02:10:16.362",
+      "dateFinished": "2021-10-10 02:10:20.014",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-case-when-otherwise-example/\nimport org.apache.spark.sql.functions.{when, _}\nimport spark.sqlContext.implicits._\n\nval data \u003d List((\"James\",\"\",\"Smith\",\"36636\",\"M\",60000),\n        (\"Michael\",\"Rose\",\"\",\"40288\",\"M\",70000),\n        (\"Robert\",\"\",\"Williams\",\"42114\",\"\",400000),\n        (\"Maria\",\"Anne\",\"Jones\",\"39192\",\"F\",500000),\n        (\"Jen\",\"Mary\",\"Brown\",\"\",\"F\",0))\n\nval cols \u003d Seq(\"first_name\",\"middle_name\",\"last_name\",\"dob\",\"gender\",\"salary\")\nval df \u003d spark.createDataFrame(data).toDF(cols:_*)\n\nprint(\"when otherwise with col\")\nval df2 \u003d df.withColumn(\"new_gender\", when(col(\"gender\") \u003d\u003d\u003d \"M\",\"Male\")\n      .when(col(\"gender\") \u003d\u003d\u003d \"F\",\"Female\")\n      .otherwise(\"Unknown\"))\ndf2.show()\n\nprint(\"when otherwise with select\")\nval df4 \u003d df.select(col(\"*\"), when(col(\"gender\") \u003d\u003d\u003d \"M\",\"Male\")\n      .when(col(\"gender\") \u003d\u003d\u003d \"F\",\"Female\")\n      .otherwise(\"Unknown\").alias(\"new_gender\"))\ndf4.show()\n\nprint(\"case when with col\")\nval df3 \u003d df.withColumn(\"new_gender\", \n      expr(\"case when gender \u003d \u0027M\u0027 then \u0027Male\u0027 \" +\n                       \"when gender \u003d \u0027F\u0027 then \u0027Female\u0027 \" +\n                       \"else \u0027Unknown\u0027 end\"))\ndf3.show()\n\nprint(\"case when with select\")\nval df5 \u003d df.select(col(\"*\"),\n      expr(\"case when gender \u003d \u0027M\u0027 then \u0027Male\u0027 \" +\n                       \"when gender \u003d \u0027F\u0027 then \u0027Female\u0027 \" +\n                       \"else \u0027Unknown\u0027 end\").alias(\"new_gender\"))\ndf5.show()\n\nval dataDF \u003d Seq(\n      (66, \"a\", \"4\"), (67, \"a\", \"0\"), (70, \"b\", \"4\"), (71, \"d\", \"4\"\n      )).toDF(\"id\", \"code\", \"amt\")\ndataDF.withColumn(\"new_column\",\n       when(col(\"code\") \u003d\u003d\u003d \"a\" || col(\"code\") \u003d\u003d\u003d \"d\", \"A\")\n      .when(col(\"code\") \u003d\u003d\u003d \"b\" \u0026\u0026 col(\"amt\") \u003d\u003d\u003d \"4\", \"B\")\n      .otherwise(\"A1\"))\n      .show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 02:14:08.040",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "when otherwise with col+----------+-----------+---------+-----+------+------+----------+\n|first_name|middle_name|last_name|  dob|gender|salary|new_gender|\n+----------+-----------+---------+-----+------+------+----------+\n|     James|           |    Smith|36636|     M| 60000|      Male|\n|   Michael|       Rose|         |40288|     M| 70000|      Male|\n|    Robert|           | Williams|42114|      |400000|   Unknown|\n|     Maria|       Anne|    Jones|39192|     F|500000|    Female|\n|       Jen|       Mary|    Brown|     |     F|     0|    Female|\n+----------+-----------+---------+-----+------+------+----------+\n\nwhen otherwise with select+----------+-----------+---------+-----+------+------+----------+\n|first_name|middle_name|last_name|  dob|gender|salary|new_gender|\n+----------+-----------+---------+-----+------+------+----------+\n|     James|           |    Smith|36636|     M| 60000|      Male|\n|   Michael|       Rose|         |40288|     M| 70000|      Male|\n|    Robert|           | Williams|42114|      |400000|   Unknown|\n|     Maria|       Anne|    Jones|39192|     F|500000|    Female|\n|       Jen|       Mary|    Brown|     |     F|     0|    Female|\n+----------+-----------+---------+-----+------+------+----------+\n\ncase when with col+----------+-----------+---------+-----+------+------+----------+\n|first_name|middle_name|last_name|  dob|gender|salary|new_gender|\n+----------+-----------+---------+-----+------+------+----------+\n|     James|           |    Smith|36636|     M| 60000|      Male|\n|   Michael|       Rose|         |40288|     M| 70000|      Male|\n|    Robert|           | Williams|42114|      |400000|   Unknown|\n|     Maria|       Anne|    Jones|39192|     F|500000|    Female|\n|       Jen|       Mary|    Brown|     |     F|     0|    Female|\n+----------+-----------+---------+-----+------+------+----------+\n\ncase when with select+----------+-----------+---------+-----+------+------+----------+\n|first_name|middle_name|last_name|  dob|gender|salary|new_gender|\n+----------+-----------+---------+-----+------+------+----------+\n|     James|           |    Smith|36636|     M| 60000|      Male|\n|   Michael|       Rose|         |40288|     M| 70000|      Male|\n|    Robert|           | Williams|42114|      |400000|   Unknown|\n|     Maria|       Anne|    Jones|39192|     F|500000|    Female|\n|       Jen|       Mary|    Brown|     |     F|     0|    Female|\n+----------+-----------+---------+-----+------+------+----------+\n\n+---+----+---+----------+\n| id|code|amt|new_column|\n+---+----+---+----------+\n| 66|   a|  4|         A|\n| 67|   a|  0|         A|\n| 70|   b|  4|         B|\n| 71|   d|  4|         A|\n+---+----+---+----------+\n\nimport org.apache.spark.sql.functions.{when, _}\nimport spark.sqlContext.implicits._\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32mList[(String, String, String, String, String, Int)]\u001b[0m \u003d List((James,\"\",Smith,36636,M,60000), (Michael,Rose,\"\",40288,M,70000), (Robert,\"\",Williams,42114,\"\",400000), (Maria,Anne,Jones,39192,F,500000), (Jen,Mary,Brown,\"\",F,0))\n\u001b[1m\u001b[34mcols\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(first_name, middle_name, last_name, dob, gender, salary)\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [first_name: string, middle_name: string ... 4 more fields]\n\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [first_name: string, middle_name: string ... 5 more fields]\n\u001b[1m\u001b[34mdf4\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [first_name: string, middle_name: string...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633799416358_2122733962",
+      "id": "paragraph_1633799416358_2122733962",
+      "dateCreated": "2021-10-10 02:10:16.360",
+      "dateStarted": "2021-10-10 02:14:08.057",
+      "dateFinished": "2021-10-10 02:14:14.220",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-remove-duplicate-rows/\n\nimport spark.implicits._\n\nval simpleData \u003d Seq((\"James\", \"Sales\", 3000),\n  (\"Michael\", \"Sales\", 4600),\n  (\"Robert\", \"Sales\", 4100),\n  (\"Maria\", \"Finance\", 3000),\n  (\"James\", \"Sales\", 3000),\n  (\"Scott\", \"Finance\", 3300),\n  (\"Jen\", \"Finance\", 3900),\n  (\"Jeff\", \"Marketing\", 3000),\n  (\"Kumar\", \"Marketing\", 2000),\n  (\"Saif\", \"Sales\", 4100)\n)\nval df \u003d simpleData.toDF(\"employee_name\", \"department\", \"salary\")\ndf.show()\n\n//Distinct all columns\nval distinctDF \u003d df.distinct()\nprintln(\"Distinct count: \"+distinctDF.count())\ndistinctDF.show(false)\n\nval df2 \u003d df.dropDuplicates()\nprintln(\"Distinct count: \"+df2.count())\ndf2.show(false)\n\n//Distinct using dropDuplicates\nval dropDisDF \u003d df.dropDuplicates(\"department\",\"salary\")\nprintln(\"Distinct count of department \u0026 salary : \"+dropDisDF.count())\ndropDisDF.show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 02:20:19.054",
+      "progress": 90,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------+----------+------+\n|employee_name|department|salary|\n+-------------+----------+------+\n|        James|     Sales|  3000|\n|      Michael|     Sales|  4600|\n|       Robert|     Sales|  4100|\n|        Maria|   Finance|  3000|\n|        James|     Sales|  3000|\n|        Scott|   Finance|  3300|\n|          Jen|   Finance|  3900|\n|         Jeff| Marketing|  3000|\n|        Kumar| Marketing|  2000|\n|         Saif|     Sales|  4100|\n+-------------+----------+------+\n\nDistinct count: 9\n+-------------+----------+------+\n|employee_name|department|salary|\n+-------------+----------+------+\n|Robert       |Sales     |4100  |\n|James        |Sales     |3000  |\n|Saif         |Sales     |4100  |\n|Scott        |Finance   |3300  |\n|Michael      |Sales     |4600  |\n|Maria        |Finance   |3000  |\n|Jeff         |Marketing |3000  |\n|Jen          |Finance   |3900  |\n|Kumar        |Marketing |2000  |\n+-------------+----------+------+\n\nDistinct count: 9\n+-------------+----------+------+\n|employee_name|department|salary|\n+-------------+----------+------+\n|Robert       |Sales     |4100  |\n|James        |Sales     |3000  |\n|Saif         |Sales     |4100  |\n|Scott        |Finance   |3300  |\n|Michael      |Sales     |4600  |\n|Maria        |Finance   |3000  |\n|Jeff         |Marketing |3000  |\n|Jen          |Finance   |3900  |\n|Kumar        |Marketing |2000  |\n+-------------+----------+------+\n\nDistinct count of department \u0026 salary : 8\n+-------------+----------+------+\n|employee_name|department|salary|\n+-------------+----------+------+\n|Jen          |Finance   |3900  |\n|Maria        |Finance   |3000  |\n|Michael      |Sales     |4600  |\n|Kumar        |Marketing |2000  |\n|Robert       |Sales     |4100  |\n|Scott        |Finance   |3300  |\n|James        |Sales     |3000  |\n|Jeff         |Marketing |3000  |\n+-------------+----------+------+\n\nimport spark.implicits._\n\u001b[1m\u001b[34msimpleData\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String, Int)]\u001b[0m \u003d List((James,Sales,3000), (Michael,Sales,4600), (Robert,Sales,4100), (Maria,Finance,3000), (James,Sales,3000), (Scott,Finance,3300), (Jen,Finance,3900), (Jeff,Marketing,3000), (Kumar,Marketing,2000), (Saif,Sales,4100))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [employee_name: string, department: string ... 1 more field]\n\u001b[1m\u001b[34mdistinctDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [employee_name: string, department: string ... 1 more field]\n\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [employee_name: string, department: string ... 1 more field]\n\u001b[1m\u001b[34mdropDisDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Data...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d667"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d668"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d669"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d670"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d671"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d672"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d673"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d674"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d675"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d676"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d677"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d678"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d679"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d680"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d681"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633799445467_989011228",
+      "id": "paragraph_1633799445467_989011228",
+      "dateCreated": "2021-10-10 02:10:45.468",
+      "dateStarted": "2021-10-10 02:20:19.076",
+      "dateFinished": "2021-10-10 02:20:42.272",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-how-to-sort-dataframe-column-explained/\n\nimport spark.implicits._\n\nval simpleData \u003d Seq(Row(\"James\",\"Sales\",\"NY\",90000,34,10000),\n    Row(\"Michael\",\"Sales\",\"NY\",86000,56,20000),\n    Row(\"Robert\",\"Sales\",\"CA\",81000,30,23000),\n    Row(\"Maria\",\"Finance\",\"CA\",90000,24,23000),\n    Row(\"Raman\",\"Finance\",\"CA\",99000,40,24000),\n    Row(\"Scott\",\"Finance\",\"NY\",83000,36,19000),\n    Row(\"Jen\",\"Finance\",\"NY\",79000,53,15000),\n    Row(\"Jeff\",\"Marketing\",null,80000,25,18000),\n    Row(\"Kumar\",\"Marketing\",\"NY\",91000,50,21000)\n)\n\nval structureSchema \u003d new StructType(Array(\n    StructField(\"employee_name\", StringType, false),\n    StructField(\"department\", StringType, false),\n    StructField(\"state\" ,StringType, true),\n    StructField(\"salary\", IntegerType, false),\n    StructField(\"age\", IntegerType, false),\n    StructField(\"bonus\", IntegerType, false)\n  ))\n\nval df \u003d spark.createDataFrame(spark.sparkContext.parallelize(simpleData), structureSchema)\ndf.printSchema()\ndf.show()\n\ndf.sort(\"department\",\"state\").show(false)\ndf.sort(col(\"department\"),col(\"state\")).show(false)\n\ndf.orderBy(\"department\",\"state\").show(false)\ndf.orderBy(col(\"department\"),col(\"state\")).show(false)\n\ndf.sort(col(\"department\").asc,col(\"state\").asc).show(false)\ndf.orderBy(col(\"department\").asc,col(\"state\").asc).show(false)\n\ndf.sort(col(\"department\").asc,col(\"state\").desc).show(false)\ndf.orderBy(col(\"department\").asc,col(\"state\").desc).show(false)\n\n// error: java.lang.UnsupportedOperationException: Cannot generate code for expression: input[1, string, true] ASC NULLS FIRST\n// df.select($\"employee_name\",asc(\"department\"),desc(\"state\"),$\"salary\",$\"age\",$\"bonus\").show(false)\n// df.createOrReplaceTempView(\"EMP\")\n// spark.sql(\"select employee_name,asc(\u0027department\u0027),desc(\u0027state\u0027),salary,age,bonus from EMP\").show(false)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 21:30:29.151",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- employee_name: string (nullable \u003d false)\n |-- department: string (nullable \u003d false)\n |-- state: string (nullable \u003d true)\n |-- salary: integer (nullable \u003d false)\n |-- age: integer (nullable \u003d false)\n |-- bonus: integer (nullable \u003d false)\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|        James|     Sales|   NY| 90000| 34|10000|\n|      Michael|     Sales|   NY| 86000| 56|20000|\n|       Robert|     Sales|   CA| 81000| 30|23000|\n|        Maria|   Finance|   CA| 90000| 24|23000|\n|        Raman|   Finance|   CA| 99000| 40|24000|\n|        Scott|   Finance|   NY| 83000| 36|19000|\n|          Jen|   Finance|   NY| 79000| 53|15000|\n|         Jeff| Marketing| null| 80000| 25|18000|\n|        Kumar| Marketing|   NY| 91000| 50|21000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n|James        |Sales     |NY   |90000 |34 |10000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n|James        |Sales     |NY   |90000 |34 |10000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n|James        |Sales     |NY   |90000 |34 |10000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n|James        |Sales     |NY   |90000 |34 |10000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n|James        |Sales     |NY   |90000 |34 |10000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n|James        |Sales     |NY   |90000 |34 |10000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n|James        |Sales     |NY   |90000 |34 |10000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n+-------------+----------+-----+------+---+-----+\n\n+-------------+----------+-----+------+---+-----+\n|employee_name|department|state|salary|age|bonus|\n+-------------+----------+-----+------+---+-----+\n|Scott        |Finance   |NY   |83000 |36 |19000|\n|Jen          |Finance   |NY   |79000 |53 |15000|\n|Maria        |Finance   |CA   |90000 |24 |23000|\n|Raman        |Finance   |CA   |99000 |40 |24000|\n|Kumar        |Marketing |NY   |91000 |50 |21000|\n|Jeff         |Marketing |null |80000 |25 |18000|\n|Michael      |Sales     |NY   |86000 |56 |20000|\n|James        |Sales     |NY   |90000 |34 |10000|\n|Robert       |Sales     |CA   |81000 |30 |23000|\n+-------------+----------+-----+------+---+-----+\n\njava.lang.UnsupportedOperationException: Cannot generate code for expression: input[1, string, false] ASC NULLS FIRST\n  at org.apache.spark.sql.catalyst.expressions.Unevaluable.doGenCode(Expression.scala:307)\n  at org.apache.spark.sql.catalyst.expressions.Unevaluable.doGenCode$(Expression.scala:306)\n  at org.apache.spark.sql.catalyst.expressions.SortOrder.doGenCode(SortOrder.scala:62)\n  at org.apache.spark.sql.catalyst.expressions.Expression.$anonfun$genCode$3(Expression.scala:146)\n  at scala.Option.getOrElse(Option.scala:189)\n  at org.apache.spark.sql.catalyst.expressions.Expression.genCode(Expression.scala:141)\n  at org.apache.spark.sql.catalyst.expressions.Alias.genCode(namedExpressions.scala:163)\n  at org.apache.spark.sql.execution.ProjectExec.$anonfun$doConsume$2(basicPhysicalOperators.scala:73)\n  at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:238)\n  at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)\n  at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)\n  at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)\n  at scala.collection.TraversableLike.map(TraversableLike.scala:238)\n  at scala.collection.TraversableLike.map$(TraversableLike.scala:231)\n  at scala.collection.AbstractTraversable.map(Traversable.scala:108)\n  at org.apache.spark.sql.execution.ProjectExec.$anonfun$doConsume$1(basicPhysicalOperators.scala:73)\n  at org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext.withSubExprEliminationExprs(CodeGenerator.scala:1026)\n  at org.apache.spark.sql.execution.ProjectExec.doConsume(basicPhysicalOperators.scala:73)\n  at org.apache.spark.sql.execution.CodegenSupport.consume(WholeStageCodegenExec.scala:194)\n  at org.apache.spark.sql.execution.CodegenSupport.consume$(WholeStageCodegenExec.scala:149)\n  at org.apache.spark.sql.execution.RDDScanExec.consume(ExistingRDD.scala:132)\n  at org.apache.spark.sql.execution.InputRDDCodegen.doProduce(WholeStageCodegenExec.scala:483)\n  at org.apache.spark.sql.execution.InputRDDCodegen.doProduce$(WholeStageCodegenExec.scala:456)\n  at org.apache.spark.sql.execution.RDDScanExec.doProduce(ExistingRDD.scala:132)\n  at org.apache.spark.sql.execution.CodegenSupport.$anonfun$produce$1(WholeStageCodegenExec.scala:95)\n  at org.apache.spark.sql.execution.SparkPlan.$anonfun$executeQuery$1(SparkPlan.scala:218)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:215)\n  at org.apache.spark.sql.execution.CodegenSupport.produce(WholeStageCodegenExec.scala:90)\n  at org.apache.spark.sql.execution.CodegenSupport.produce$(WholeStageCodegenExec.scala:90)\n  at org.apache.spark.sql.execution.RDDScanExec.produce(ExistingRDD.scala:132)\n  at org.apache.spark.sql.execution.ProjectExec.doProduce(basicPhysicalOperators.scala:54)\n  at org.apache.spark.sql.execution.CodegenSupport.$anonfun$produce$1(WholeStageCodegenExec.scala:95)\n  at org.apache.spark.sql.execution.SparkPlan.$anonfun$executeQuery$1(SparkPlan.scala:218)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:215)\n  at org.apache.spark.sql.execution.CodegenSupport.produce(WholeStageCodegenExec.scala:90)\n  at org.apache.spark.sql.execution.CodegenSupport.produce$(WholeStageCodegenExec.scala:90)\n  at org.apache.spark.sql.execution.ProjectExec.produce(basicPhysicalOperators.scala:41)\n  at org.apache.spark.sql.execution.WholeStageCodegenExec.doCodeGen(WholeStageCodegenExec.scala:655)\n  at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:718)\n  at org.apache.spark.sql.execution.SparkPlan.$anonfun$execute$1(SparkPlan.scala:180)\n  at org.apache.spark.sql.execution.SparkPlan.$anonfun$executeQuery$1(SparkPlan.scala:218)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:215)\n  at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:176)\n  at org.apache.spark.sql.execution.SparkPlan.getByteArrayRdd(SparkPlan.scala:321)\n  at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:439)\n  at org.apache.spark.sql.execution.SparkPlan.executeTake(SparkPlan.scala:425)\n  at org.apache.spark.sql.execution.CollectLimitExec.executeCollect(limit.scala:47)\n  at org.apache.spark.sql.Dataset.collectFromPlan(Dataset.scala:3696)\n  at org.apache.spark.sql.Dataset.$anonfun$head$1(Dataset.scala:2722)\n  at org.apache.spark.sql.Dataset.$anonfun$withAction$1(Dataset.scala:3687)\n  at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$5(SQLExecution.scala:103)\n  at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:163)\n  at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:90)\n  at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:775)\n  at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:64)\n  at org.apache.spark.sql.Dataset.withAction(Dataset.scala:3685)\n  at org.apache.spark.sql.Dataset.head(Dataset.scala:2722)\n  at org.apache.spark.sql.Dataset.take(Dataset.scala:2929)\n  at org.apache.spark.sql.Dataset.getRows(Dataset.scala:301)\n  at org.apache.spark.sql.Dataset.showString(Dataset.scala:338)\n  at org.apache.spark.sql.Dataset.show(Dataset.scala:827)\n  at org.apache.spark.sql.Dataset.show(Dataset.scala:804)\n  ... 167 elided\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d804"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d805"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d806"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d807"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d808"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d809"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d810"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d811"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d812"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d813"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d814"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633801240242_1638796693",
+      "id": "paragraph_1633801240242_1638796693",
+      "dateCreated": "2021-10-10 02:40:40.244",
+      "dateStarted": "2021-10-10 21:29:58.474",
+      "dateFinished": "2021-10-10 21:30:06.596",
+      "status": "ERROR"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-dataframe-map-maptype-column/\n\nval arrayStructureData \u003d Seq(\nRow(\"James\",List(Row(\"Newark\",\"NY\"),Row(\"Brooklyn\",\"NY\")),\n  Map(\"hair\"-\u003e\"black\",\"eye\"-\u003e\"brown\"), Map(\"height\"-\u003e\"5.9\")),\nRow(\"Michael\",List(Row(\"SanJose\",\"CA\"),Row(\"Sandiago\",\"CA\")),\n  Map(\"hair\"-\u003e\"brown\",\"eye\"-\u003e\"black\"),Map(\"height\"-\u003e\"6\")),\nRow(\"Robert\",List(Row(\"LasVegas\",\"NV\")),\n  Map(\"hair\"-\u003e\"red\",\"eye\"-\u003e\"gray\"),Map(\"height\"-\u003e\"6.3\")),\nRow(\"Maria\",null,Map(\"hair\"-\u003e\"blond\",\"eye\"-\u003e\"red\"),\n  Map(\"height\"-\u003e\"5.6\")),\nRow(\"Jen\",List(Row(\"LAX\",\"CA\"),Row(\"Orange\",\"CA\")),\n  Map(\"white\"-\u003e\"black\",\"eye\"-\u003e\"black\"),Map(\"height\"-\u003e\"5.2\"))\n)\n\nval mapType  \u003d DataTypes.createMapType(StringType,StringType)\n\nval arrayStructureSchema \u003d new StructType()\n.add(\"name\",StringType)\n.add(\"addresses\", ArrayType(new StructType()\n  .add(\"city\",StringType)\n  .add(\"state\",StringType)))\n.add(\"properties\", mapType)\n.add(\"secondProp\", MapType(StringType,StringType))\n\nval mapTypeDF \u003d spark.createDataFrame(\nspark.sparkContext.parallelize(arrayStructureData),arrayStructureSchema)\nmapTypeDF.printSchema()\nmapTypeDF.show()\n\nmapTypeDF.select(col(\"name\"),map_keys(col(\"properties\"))).show(false)\nmapTypeDF.select(col(\"name\"),map_values(col(\"properties\"))).show(false)\nmapTypeDF.select(col(\"name\"),map_concat(col(\"properties\"),col(\"secondProp\"))).show(false)\n\nimport scala.collection.mutable.LinkedHashSet\nimport org.apache.spark.sql.Column\n\nval structureData \u003d Seq(\n  Row(\"36636\",\"Finance\",Row(3000,\"USA\")),\n  Row(\"40288\",\"Finance\",Row(5000,\"IND\")),\n  Row(\"42114\",\"Sales\",Row(3900,\"USA\")),\n  Row(\"39192\",\"Marketing\",Row(2500,\"CAN\")),\n  Row(\"34534\",\"Sales\",Row(6500,\"USA\"))\n)\n\nval structureSchema \u003d new StructType()\n  .add(\"id\",StringType)\n  .add(\"dept\",StringType)\n  .add(\"properties\",new StructType()\n    .add(\"salary\",IntegerType)\n    .add(\"location\",StringType)\n  )\n\nvar df \u003d spark.createDataFrame(\n  spark.sparkContext.parallelize(structureData),structureSchema)\n\nval index \u003d df.schema.fieldIndex(\"properties\")\nval propSchema \u003d df.schema(index).dataType.asInstanceOf[StructType]\nvar columns \u003d LinkedHashSet[Column]()\npropSchema.fields.foreach(field \u003d\u003e{\n  columns.add(lit(field.name))\n  columns.add(col(\"properties.\" + field.name))\n})\n\ndf \u003d df.withColumn(\"propertiesMap\",map(columns.toSeq:_*))\ndf \u003d df.withColumn(\"te\",lit(1))\ndf \u003d df.drop(\"properties\")\ndf.printSchema()\ndf.show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 21:31:44.251",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- name: string (nullable \u003d true)\n |-- addresses: array (nullable \u003d true)\n |    |-- element: struct (containsNull \u003d true)\n |    |    |-- city: string (nullable \u003d true)\n |    |    |-- state: string (nullable \u003d true)\n |-- properties: map (nullable \u003d true)\n |    |-- key: string\n |    |-- value: string (valueContainsNull \u003d true)\n |-- secondProp: map (nullable \u003d true)\n |    |-- key: string\n |    |-- value: string (valueContainsNull \u003d true)\n\n+-------+--------------------+--------------------+---------------+\n|   name|           addresses|          properties|     secondProp|\n+-------+--------------------+--------------------+---------------+\n|  James|[{Newark, NY}, {B...|{hair -\u003e black, e...|{height -\u003e 5.9}|\n|Michael|[{SanJose, CA}, {...|{hair -\u003e brown, e...|  {height -\u003e 6}|\n| Robert|    [{LasVegas, NV}]|{hair -\u003e red, eye...|{height -\u003e 6.3}|\n|  Maria|                null|{hair -\u003e blond, e...|{height -\u003e 5.6}|\n|    Jen|[{LAX, CA}, {Oran...|{white -\u003e black, ...|{height -\u003e 5.2}|\n+-------+--------------------+--------------------+---------------+\n\n+-------+--------------------+\n|name   |map_keys(properties)|\n+-------+--------------------+\n|James  |[hair, eye]         |\n|Michael|[hair, eye]         |\n|Robert |[hair, eye]         |\n|Maria  |[hair, eye]         |\n|Jen    |[white, eye]        |\n+-------+--------------------+\n\n+-------+----------------------+\n|name   |map_values(properties)|\n+-------+----------------------+\n|James  |[black, brown]        |\n|Michael|[brown, black]        |\n|Robert |[red, gray]           |\n|Maria  |[blond, red]          |\n|Jen    |[black, black]        |\n+-------+----------------------+\n\n+-------+---------------------------------------------+\n|name   |map_concat(properties, secondProp)           |\n+-------+---------------------------------------------+\n|James  |{hair -\u003e black, eye -\u003e brown, height -\u003e 5.9} |\n|Michael|{hair -\u003e brown, eye -\u003e black, height -\u003e 6}   |\n|Robert |{hair -\u003e red, eye -\u003e gray, height -\u003e 6.3}    |\n|Maria  |{hair -\u003e blond, eye -\u003e red, height -\u003e 5.6}   |\n|Jen    |{white -\u003e black, eye -\u003e black, height -\u003e 5.2}|\n+-------+---------------------------------------------+\n\nroot\n |-- id: string (nullable \u003d true)\n |-- dept: string (nullable \u003d true)\n |-- propertiesMap: map (nullable \u003d false)\n |    |-- key: string\n |    |-- value: string (valueContainsNull \u003d true)\n |-- te: integer (nullable \u003d false)\n\n+-----+---------+---------------------------------+---+\n|id   |dept     |propertiesMap                    |te |\n+-----+---------+---------------------------------+---+\n|36636|Finance  |{salary -\u003e 3000, location -\u003e USA}|1  |\n|40288|Finance  |{salary -\u003e 5000, location -\u003e IND}|1  |\n|42114|Sales    |{salary -\u003e 3900, location -\u003e USA}|1  |\n|39192|Marketing|{salary -\u003e 2500, location -\u003e CAN}|1  |\n|34534|Sales    |{salary -\u003e 6500, location -\u003e USA}|1  |\n+-----+---------+---------------------------------+---+\n\n\u001b[1m\u001b[34marrayStructureData\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([James,List([Newark,NY], [Brooklyn,NY]),Map(hair -\u003e black, eye -\u003e brown),Map(height -\u003e 5.9)], [Michael,List([SanJose,CA], [Sandiago,CA]),Map(hair -\u003e brown, eye -\u003e black),Map(height -\u003e 6)], [Robert,List([LasVegas,NV]),Map(hair -\u003e red, eye -\u003e gray),Map(height -\u003e 6.3)], [Maria,null,Map(hair -\u003e blond, eye -\u003e red),Map(height -\u003e 5.6)], [Jen,List([LAX,CA], [Orange,CA]),Map(white -\u003e black, eye -\u003e black),Map(height -\u003e 5.2)])\n\u001b[1m\u001b[34mmapType\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.MapType\u001b[0m \u003d MapType(StringType,StringType,true)\n\u001b[1m\u001b[34marrayStructureSchema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StringType,true), StructField(addresses,ArrayType(StructType(StructFie...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d815"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d816"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d817"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d818"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d819"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d820"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d821"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d822"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d823"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d824"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d825"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d826"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d827"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d828"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d829"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633800019068_1183676456",
+      "id": "paragraph_1633800019068_1183676456",
+      "dateCreated": "2021-10-10 02:20:19.072",
+      "dateStarted": "2021-10-10 21:31:44.273",
+      "dateFinished": "2021-10-10 21:31:50.798",
+      "status": "FINISHED"
+    },
+    {
+      "text": "\nimport spark.implicits._\nval simpleData \u003d Seq((\"James\",\"Sales\",\"NY\",90000,34,10000),\n    (\"Michael\",\"Sales\",\"NY\",86000,56,20000),\n    (\"Robert\",\"Sales\",\"CA\",81000,30,23000),\n    (\"Maria\",\"Finance\",\"CA\",90000,24,23000),\n    (\"Raman\",\"Finance\",\"CA\",99000,40,24000),\n    (\"Scott\",\"Finance\",\"NY\",83000,36,19000),\n    (\"Jen\",\"Finance\",\"NY\",79000,53,15000),\n    (\"Jeff\",\"Marketing\",\"CA\",80000,25,18000),\n    (\"Kumar\",\"Marketing\",\"NY\",91000,50,21000)\n  )\nval df \u003d simpleData.toDF(\"employee_name\",\"department\",\"state\",\"salary\",\"age\",\"bonus\")\n\nimport org.apache.spark.sql.functions._\ndf.groupBy(\"department\")\n    .agg(\n      sum(\"salary\").as(\"sum_salary\"),\n      avg(\"salary\").as(\"avg_salary\"),\n      sum(\"bonus\").as(\"sum_bonus\"),\n      max(\"bonus\").as(\"max_bonus\"))\n    .show(false)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 21:38:52.814",
+      "progress": 90,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+----------+-----------------+---------+---------+\n|department|sum_salary|avg_salary       |sum_bonus|max_bonus|\n+----------+----------+-----------------+---------+---------+\n|Sales     |257000    |85666.66666666667|53000    |23000    |\n|Marketing |171000    |85500.0          |39000    |21000    |\n|Finance   |351000    |87750.0          |81000    |24000    |\n+----------+----------+-----------------+---------+---------+\n\nimport spark.implicits._\n\u001b[1m\u001b[34msimpleData\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String, String, Int, Int, Int)]\u001b[0m \u003d List((James,Sales,NY,90000,34,10000), (Michael,Sales,NY,86000,56,20000), (Robert,Sales,CA,81000,30,23000), (Maria,Finance,CA,90000,24,23000), (Raman,Finance,CA,99000,40,24000), (Scott,Finance,NY,83000,36,19000), (Jen,Finance,NY,79000,53,15000), (Jeff,Marketing,CA,80000,25,18000), (Kumar,Marketing,NY,91000,50,21000))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [employee_name: string, department: string ... 4 more fields]\nimport org.apache.spark.sql.functions._\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d830"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d831"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d832"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d833"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633842451773_404024426",
+      "id": "paragraph_1633842451773_404024426",
+      "dateCreated": "2021-10-10 14:07:31.778",
+      "dateStarted": "2021-10-10 21:38:52.834",
+      "dateFinished": "2021-10-10 21:39:04.856",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-array-arraytype-dataframe-column/\n\nval arrayStructureData \u003d Seq(\nRow(\"James,,Smith\",List(\"Java\",\"Scala\",\"C++\"),List(\"Spark\",\"Java\"),\"OH\",\"CA\"),\nRow(\"Michael,Rose,\",List(\"Spark\",\"Java\",\"C++\"),List(\"Spark\",\"Java\"),\"NY\",\"NJ\"),\nRow(\"Robert,,Williams\",List(\"CSharp\",\"VB\"),List(\"Spark\",\"Python\"),\"UT\",\"NV\")\n)\nval arrayStructureSchema \u003d new StructType()\n    .add(\"name\",StringType)\n    .add(\"languagesAtSchool\", ArrayType(StringType))\n    .add(\"languagesAtWork\", ArrayType(StringType))\n    .add(\"currentState\", StringType)\n    .add(\"previousState\", StringType)\nval df \u003d spark.createDataFrame(\n    spark.sparkContext.parallelize(arrayStructureData),arrayStructureSchema)\ndf.printSchema()\ndf.show()\n\ndf.select($\"name\",explode($\"languagesAtSchool\")).show(false)\ndf.select(split($\"name\",\",\").as(\"nameAsArray\")).show(false)\ndf.select(split($\"name\",\",\").as(\"nameAsArray\")).sort(col(\"nameAsArray\").desc).show(false)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 23:30:50.716",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- name: string (nullable \u003d true)\n |-- languagesAtSchool: array (nullable \u003d true)\n |    |-- element: string (containsNull \u003d true)\n |-- languagesAtWork: array (nullable \u003d true)\n |    |-- element: string (containsNull \u003d true)\n |-- currentState: string (nullable \u003d true)\n |-- previousState: string (nullable \u003d true)\n\n+----------------+------------------+---------------+------------+-------------+\n|            name| languagesAtSchool|languagesAtWork|currentState|previousState|\n+----------------+------------------+---------------+------------+-------------+\n|    James,,Smith|[Java, Scala, C++]|  [Spark, Java]|          OH|           CA|\n|   Michael,Rose,|[Spark, Java, C++]|  [Spark, Java]|          NY|           NJ|\n|Robert,,Williams|      [CSharp, VB]|[Spark, Python]|          UT|           NV|\n+----------------+------------------+---------------+------------+-------------+\n\n+----------------+------+\n|name            |col   |\n+----------------+------+\n|James,,Smith    |Java  |\n|James,,Smith    |Scala |\n|James,,Smith    |C++   |\n|Michael,Rose,   |Spark |\n|Michael,Rose,   |Java  |\n|Michael,Rose,   |C++   |\n|Robert,,Williams|CSharp|\n|Robert,,Williams|VB    |\n+----------------+------+\n\n+--------------------+\n|nameAsArray         |\n+--------------------+\n|[James, , Smith]    |\n|[Michael, Rose, ]   |\n|[Robert, , Williams]|\n+--------------------+\n\n+--------------------+\n|nameAsArray         |\n+--------------------+\n|[Robert, , Williams]|\n|[Michael, Rose, ]   |\n|[James, , Smith]    |\n+--------------------+\n\n\u001b[1m\u001b[34marrayStructureData\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([James,,Smith,List(Java, Scala, C++),List(Spark, Java),OH,CA], [Michael,Rose,,List(Spark, Java, C++),List(Spark, Java),NY,NJ], [Robert,,Williams,List(CSharp, VB),List(Spark, Python),UT,NV])\n\u001b[1m\u001b[34marrayStructureSchema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StringType,true), StructField(languagesAtSchool,ArrayType(StringType,true),true), StructField(languagesAtWork,ArrayType(StringType,true),true), StructField(currentState,StringType,true), StructField(previousState,StringType,true))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [name: string, languagesAtSchool: array\u003cstring\u003e ... 3 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d866"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d867"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d868"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d869"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d870"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d871"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d872"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d873"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d874"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d875"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633869399772_598379071",
+      "id": "paragraph_1633869399772_598379071",
+      "dateCreated": "2021-10-10 21:36:39.777",
+      "dateStarted": "2021-10-10 23:30:33.282",
+      "dateFinished": "2021-10-10 23:30:39.958",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-flatten-nested-struct-column/\n\nval structureData \u003d Seq(\n    Row(Row(\"James \",\"\",\"Smith\"),Row(Row(\"CA\",\"Los Angles\"),Row(\"CA\",\"Sandiago\"))),\n    Row(Row(\"Michael \",\"Rose\",\"\"),Row(Row(\"NY\",\"New York\"),Row(\"NJ\",\"Newark\"))),\n    Row(Row(\"Robert \",\"\",\"Williams\"),Row(Row(\"DE\",\"Newark\"),Row(\"CA\",\"Las Vegas\"))),\n    Row(Row(\"Maria \",\"Anne\",\"Jones\"),Row(Row(\"PA\",\"Harrisburg\"),Row(\"CA\",\"Sandiago\"))),\n    Row(Row(\"Jen\",\"Mary\",\"Brown\"),Row(Row(\"CA\",\"Los Angles\"),Row(\"NJ\",\"Newark\")))\n  )\n\nval structureSchema \u003d new StructType()\n    .add(\"name\",new StructType()\n      .add(\"firstname\",StringType)\n      .add(\"middlename\",StringType)\n      .add(\"lastname\",StringType))\n    .add(\"address\",new StructType()\n      .add(\"current\",new StructType()\n        .add(\"state\",StringType)\n        .add(\"city\",StringType))\n      .add(\"previous\",new StructType()\n        .add(\"state\",StringType)\n        .add(\"city\",StringType)))\n\nval df \u003d spark.createDataFrame(\n    spark.sparkContext.parallelize(structureData),structureSchema)\ndf.printSchema()\n\ndef flattenStructSchema(schema: StructType, prefix: String \u003d null) : Array[Column] \u003d {\n    schema.fields.flatMap(f \u003d\u003e {\n      val columnName \u003d if (prefix \u003d\u003d null) f.name else (prefix + \".\" + f.name)\n\n      f.dataType match {\n        case st: StructType \u003d\u003e flattenStructSchema(st, columnName)\n        case _ \u003d\u003e Array(col(columnName).as(columnName.replace(\".\",\"_\")))\n      }\n    })\n  }\n\nval df3 \u003d df.select(flattenStructSchema(df.schema):_*)\ndf3.printSchema()\ndf3.show(false)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-10 23:37:48.216",
+      "progress": 33,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- name: struct (nullable \u003d true)\n |    |-- firstname: string (nullable \u003d true)\n |    |-- middlename: string (nullable \u003d true)\n |    |-- lastname: string (nullable \u003d true)\n |-- address: struct (nullable \u003d true)\n |    |-- current: struct (nullable \u003d true)\n |    |    |-- state: string (nullable \u003d true)\n |    |    |-- city: string (nullable \u003d true)\n |    |-- previous: struct (nullable \u003d true)\n |    |    |-- state: string (nullable \u003d true)\n |    |    |-- city: string (nullable \u003d true)\n\nroot\n |-- name_firstname: string (nullable \u003d true)\n |-- name_middlename: string (nullable \u003d true)\n |-- name_lastname: string (nullable \u003d true)\n |-- address_current_state: string (nullable \u003d true)\n |-- address_current_city: string (nullable \u003d true)\n |-- address_previous_state: string (nullable \u003d true)\n |-- address_previous_city: string (nullable \u003d true)\n\n+--------------+---------------+-------------+---------------------+--------------------+----------------------+---------------------+\n|name_firstname|name_middlename|name_lastname|address_current_state|address_current_city|address_previous_state|address_previous_city|\n+--------------+---------------+-------------+---------------------+--------------------+----------------------+---------------------+\n|James         |               |Smith        |CA                   |Los Angles          |CA                    |Sandiago             |\n|Michael       |Rose           |             |NY                   |New York            |NJ                    |Newark               |\n|Robert        |               |Williams     |DE                   |Newark              |CA                    |Las Vegas            |\n|Maria         |Anne           |Jones        |PA                   |Harrisburg          |CA                    |Sandiago             |\n|Jen           |Mary           |Brown        |CA                   |Los Angles          |NJ                    |Newark               |\n+--------------+---------------+-------------+---------------------+--------------------+----------------------+---------------------+\n\n\u001b[1m\u001b[34mstructureData\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([[James ,,Smith],[[CA,Los Angles],[CA,Sandiago]]], [[Michael ,Rose,],[[NY,New York],[NJ,Newark]]], [[Robert ,,Williams],[[DE,Newark],[CA,Las Vegas]]], [[Maria ,Anne,Jones],[[PA,Harrisburg],[CA,Sandiago]]], [[Jen,Mary,Brown],[[CA,Los Angles],[NJ,Newark]]])\n\u001b[1m\u001b[34mstructureSchema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StructType(StructField(firstname,StringType,true), StructField(middlename,StringType,true), StructField(lastname,StringType,true)),true), StructField(address,StructType(StructField(current,StructType(StructField(state,StringType,true), StructField(city,StringType,true)),true), StructField(previous,StructType(StructField(state,StringType,true), Struct...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d876"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d877"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d878"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633875921979_1467992708",
+      "id": "paragraph_1633875921979_1467992708",
+      "dateCreated": "2021-10-10 23:25:21.983",
+      "dateStarted": "2021-10-10 23:35:50.347",
+      "dateFinished": "2021-10-10 23:35:56.579",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-flatten-nested-array-column-to-single-column/\n\n// manually added\nval arrayArrayData \u003d Seq(\n    Row(\"James\",List(List(\"Java\",\"Scala\",\"C++\"),List(\"Spark\",\"Java\"))),\n    Row(\"Michael\",List(List(\"Spark\",\"Java\",\"C++\"),List(\"Spark\",\"Java\"))),\n    Row(\"Robert\",List(List(\"CSharp\",\"VB\"),List(\"Spark\",\"Python\")))\n)\n\nval arrayArraySchema \u003d new StructType().add(\"name\",StringType)\n    .add(\"subjects\",ArrayType(ArrayType(StringType)))\n\nval df \u003d spark.createDataFrame(\n    spark.sparkContext.parallelize(arrayArrayData),arrayArraySchema)\ndf.printSchema()\ndf.show()\n\ndf.select($\"name\",flatten($\"subjects\").as(\"subjects\")).show(false)\n\ndf.select($\"name\",explode(flatten($\"subjects\"))).show(false)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-11 04:22:06.434",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- name: string (nullable \u003d true)\n |-- subjects: array (nullable \u003d true)\n |    |-- element: array (containsNull \u003d true)\n |    |    |-- element: string (containsNull \u003d true)\n\n+-------+--------------------+\n|   name|            subjects|\n+-------+--------------------+\n|  James|[[Java, Scala, C+...|\n|Michael|[[Spark, Java, C+...|\n| Robert|[[CSharp, VB], [S...|\n+-------+--------------------+\n\n+-------+-------------------------------+\n|name   |subjects                       |\n+-------+-------------------------------+\n|James  |[Java, Scala, C++, Spark, Java]|\n|Michael|[Spark, Java, C++, Spark, Java]|\n|Robert |[CSharp, VB, Spark, Python]    |\n+-------+-------------------------------+\n\n+-------+------+\n|name   |col   |\n+-------+------+\n|James  |Java  |\n|James  |Scala |\n|James  |C++   |\n|James  |Spark |\n|James  |Java  |\n|Michael|Spark |\n|Michael|Java  |\n|Michael|C++   |\n|Michael|Spark |\n|Michael|Java  |\n|Robert |CSharp|\n|Robert |VB    |\n|Robert |Spark |\n|Robert |Python|\n+-------+------+\n\n\u001b[1m\u001b[34marrayArrayData\u001b[0m: \u001b[1m\u001b[32mSeq[org.apache.spark.sql.Row]\u001b[0m \u003d List([James,List(List(Java, Scala, C++), List(Spark, Java))], [Michael,List(List(Spark, Java, C++), List(Spark, Java))], [Robert,List(List(CSharp, VB), List(Spark, Python))])\n\u001b[1m\u001b[34marrayArraySchema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(name,StringType,true), StructField(subjects,ArrayType(ArrayType(StringType,true),true),true))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [name: string, subjects: array\u003carray\u003cstring\u003e\u003e]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1208"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1209"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1210"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1211"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1212"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1213"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1214"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1215"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1216"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633876550339_1301471579",
+      "id": "paragraph_1633876550339_1301471579",
+      "dateCreated": "2021-10-10 23:35:50.344",
+      "dateStarted": "2021-10-11 04:22:06.457",
+      "dateFinished": "2021-10-11 04:22:12.404",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-sampling-with-examples/\n\nval df\u003dspark.range(100)\nprintln(\"sample : \" + df.sample(0.1).collect().mkString(\",\"))\nprintln(\"sample with seeds : \" + df.sample(0.1,123).collect().mkString(\",\"))\nprintln(\"sample with seeds(twice) : \" + df.sample(0.1,123).collect().mkString(\",\"))\nprintln(\"sample with other seeds : \" + df.sample(0.1,456).collect().mkString(\",\"))\nprintln(\"sample with Duplicates : \" + df.sample(true,0.3,123).collect().mkString(\",\"))\nprintln(\"sample without duplicates : \" + df.sample(0.3,123).collect().mkString(\",\"))\n\n// manually added\nimport spark.implicits._\nval data \u003d Seq(\n        (\"James\",\"M\",60000),\n        (\"Michael\",\"M\",70000),\n        (\"Maria\",\"F\",500000),\n        (\"Coby\",\"M\",400000),\n        (\"Mark\",\"M\",800000),\n        (\"Jeff\",\"M\",500000),\n        (\"Jen\",\"F\",0),\n        (\"James2\",\"M\",60000),\n        (\"Michael2\",\"M\",70000),\n        (\"Maria2\",\"F\",500000),\n        (\"Coby2\",\"M\",400000),\n        (\"Mark2\",\"M\",800000),\n        (\"Jeff2\",\"M\",500000),\n        (\"Jen2\",\"F\",0)\n    )\nval df2 \u003d data.toDF(\"name\",\"gender\",\"salary\")\n// cannot get expected data (like M:2,F:2) with small dataframe\ndf2.stat.sampleBy(\"gender\", Map(\"M\"-\u003e0.2,\"F\"-\u003e0.5), 0)\n  .groupBy(\"gender\")\n  .count()\n  .orderBy(\"gender\").show()\n// cannot get expected data (like 2 names of over100000) with small dataframe\ndf2.withColumn(\"over100000\",col(\"salary\") \u003e 100000)\n  .toDF()\n  .stat\n  .sampleBy(\"over100000\", Map(true-\u003e0.25), 0)\n  .orderBy(col(\"salary\").asc).show()\n\nval rdd \u003d spark.sparkContext.range(0,100)\nprintln(\"takeSample with duplicates : \" + rdd.takeSample(false,10,0).mkString(\",\"))\nprintln(\"takeSample without duplicates : \" + rdd.takeSample(true,30,123).mkString(\",\"))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-11 00:36:25.101",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "sample : 0,27,34,40,61,70,75,76,96\nsample with seeds : 35,38,41,45,71,84,87,99\nsample with seeds(twice) : 35,38,41,45,71,84,87,99\nsample with other seeds : 22,33,35,41,53,80,83,87,92\nsample with Duplicates : 0,5,9,11,13,16,17,26,26,37,41,45,49,50,50,57,58,58,65,66,71,74,77,80,81,82,84,88,90,91,91,92,94,96\nsample without duplicates : 0,4,12,15,19,21,23,24,25,28,29,34,35,36,38,41,45,47,50,52,59,63,65,71,82,84,87,94,99\n+------+-----+\n|gender|count|\n+------+-----+\n|     F|    3|\n+------+-----+\n\n+------+------+------+----------+\n|  name|gender|salary|over100000|\n+------+------+------+----------+\n| Coby2|     M|400000|      true|\n|Maria2|     F|500000|      true|\n| Maria|     F|500000|      true|\n+------+------+------+----------+\n\ntakeSample with duplicates : 35,47,32,21,69,51,16,60,71,83\ntakeSample without duplicates : 88,16,41,50,75,89,77,63,17,37,50,41,51,78,9,32,62,80,46,96,12,31,46,81,15,48,25,28,5,61\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Long]\u001b[0m \u003d [id: bigint]\nimport spark.implicits._\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String, Int)]\u001b[0m \u003d List((James,M,60000), (Michael,M,70000), (Maria,F,500000), (Coby,M,400000), (Mark,M,800000), (Jeff,M,500000), (Jen,F,0), (James2,M,60000), (Michael2,M,70000), (Maria2,F,500000), (Coby2,M,400000), (Mark2,M,800000), (Jeff2,M,500000), (Jen2,F,0))\n\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [name: string, gender: string ... 1 more field]\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Long]\u001b[0m \u003d MapPartitionsRDD[2708] at range at \u003cconsole\u003e:385\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1176"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1177"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1178"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1179"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1180"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1181"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1182"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1183"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1184"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1185"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1186"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d1187"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633876761677_320701510",
+      "id": "paragraph_1633876761677_320701510",
+      "dateCreated": "2021-10-10 23:39:21.680",
+      "dateStarted": "2021-10-11 00:36:25.114",
+      "dateFinished": "2021-10-11 00:36:39.861",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-partitioning-understanding/\n\n// manually added: union study\nspark.conf.set(\"spark.sql.shuffle.partitions\", \"200\")\nprintln(\"spark.sql.shuffle.partitions : \" + spark.conf.get(\"spark.sql.shuffle.partitions\"))\nval df\u003dspark.range(100)\nprintln(\"partition of df : \" + df.rdd.getNumPartitions)\nval df_df\u003ddf.union(df)\nprintln(\"partition of df_df : \" + df_df.rdd.getNumPartitions)\n\nval dfGroupBy \u003d df_df.groupBy(\"id\").count()\nprintln(\"partition of dfGroupBy : \" + dfGroupBy.rdd.getNumPartitions)\n\nspark.conf.set(\"spark.sql.shuffle.partitions\", \"10\")\nprintln(\"spark.sql.shuffle.partitions : \" + spark.conf.get(\"spark.sql.shuffle.partitions\"))\nval df5\u003dspark.range(100)\nprintln(\"partition of df5 : \" + df5.rdd.getNumPartitions)\nval df5_df5\u003ddf5.union(df5)\nprintln(\"partition of df5_df5 : \" + df5_df5.rdd.getNumPartitions)\n\nprintln(\"partition of df5_df5+df_df : \" + df_df.union(df5_df5).rdd.getNumPartitions)\n\nval dfGroupBy5 \u003d df5_df5.groupBy(\"id\").count()\nprintln(\"partition of dfGroupBy5 : \" + dfGroupBy5.rdd.getNumPartitions)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-11 01:33:54.907",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "spark.sql.shuffle.partitions : 200\npartition of df : 8\npartition of df_df : 16\npartition of dfGroupBy : 200\nspark.sql.shuffle.partitions : 10\npartition of df5 : 8\npartition of df5_df5 : 16\npartition of df5_df5+df_df : 32\npartition of dfGroupBy5 : 10\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Long]\u001b[0m \u003d [id: bigint]\n\u001b[1m\u001b[34mdf_df\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Long]\u001b[0m \u003d [id: bigint]\n\u001b[1m\u001b[34mdfGroupBy\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: bigint, count: bigint]\n\u001b[1m\u001b[34mdf5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Long]\u001b[0m \u003d [id: bigint]\n\u001b[1m\u001b[34mdf5_df5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Long]\u001b[0m \u003d [id: bigint]\n\u001b[1m\u001b[34mdfGroupBy5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: bigint, count: bigint]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633877616205_1391965224",
+      "id": "paragraph_1633877616205_1391965224",
+      "dateCreated": "2021-10-10 23:53:36.206",
+      "dateStarted": "2021-10-11 01:33:54.940",
+      "dateFinished": "2021-10-11 01:33:59.281",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633884371507_1498859126",
+      "id": "paragraph_1633884371507_1498859126",
+      "dateCreated": "2021-10-11 01:46:11.514",
+      "status": "READY"
+    }
+  ],
+  "name": "Spark SQL Tutorial",
+  "id": "2GKWCS26S",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

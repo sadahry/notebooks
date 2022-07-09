@@ -1,0 +1,1052 @@
+{
+  "paragraphs": [
+    {
+      "text": "// place of /spark-scala-examples\nval baseDir \u003d \"/Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/\"\nval resourcesDir \u003d baseDir + \"src/main/resources/\"\nval csvDir \u003d resourcesDir + \"csv/\"\nval storageDir \u003d \"/Users/sadahiroyoshi/Documents/apps/sandbox/spark-rdd-tutorial/\"",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 21:14:16.761",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mbaseDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/\n\u001b[1m\u001b[34mresourcesDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/\n\u001b[1m\u001b[34mcsvDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/csv/\n\u001b[1m\u001b[34mstorageDir\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/sandbox/spark-rdd-tutorial/\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633728733874_666657084",
+      "id": "paragraph_1633728733874_666657084",
+      "dateCreated": "2021-10-09 06:32:13.876",
+      "dateStarted": "2021-10-09 21:14:16.780",
+      "dateFinished": "2021-10-09 21:14:18.890",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/how-to-create-an-rdd-using-parallelize/\n\nval rdd \u003d sc.parallelize(Array(1,2,3,4,5,6,7,8,9,10))\nrdd.toDF().show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 15:12:53.752",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+\n|value|\n+-----+\n|    1|\n|    2|\n|    3|\n|    4|\n|    5|\n|    6|\n|    7|\n|    8|\n|    9|\n|   10|\n+-----+\n\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Int]\u001b[0m \u003d ParallelCollectionRDD[82] at parallelize at \u003cconsole\u003e:56\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d26"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d27"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d28"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633728675534_1229254373",
+      "id": "paragraph_1633728675534_1229254373",
+      "dateCreated": "2021-10-09 06:31:15.534",
+      "dateStarted": "2021-10-09 15:12:53.775",
+      "dateFinished": "2021-10-09 15:12:55.040",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/spark-read-multiple-text-files-into-a-single-rdd/\n\nprintln(\"rdd\")\nval rdd \u003d spark.sparkContext.textFile(csvDir + \"*\")\nrdd.toDF().show()\n\nprintln(\"rddWhole\")\nval rddWhole \u003d spark.sparkContext.wholeTextFiles(csvDir + \"*\")\nrddWhole.toDF().show()\n\nprintln(\"rdd3\")\nval rdd3 \u003d spark.sparkContext.textFile(csvDir + \"text02.txt\")\nrdd3.toDF().show()\n\nprintln(\"rdd6\")\nval rdd6 \u003d rdd.map(f\u003d\u003e{\n  f.split(\",\")\n})\nrdd6.map(f \u003d\u003e {\n  \"Col1:\"+f(0)+\",Col2:\"+f(1)\n}).toDF().show()\n\nprintln(\"rdd7\")\n// manually added\nval rdd7 \u003d rdd.map(f\u003d\u003e{\n  val elements \u003d f.split(\",\")\n  (elements(0),elements(1))\n})\nrdd7.toDF().show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 18:21:21.999",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "value": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "_1": "string",
+                      "_2": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "2": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "value": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "rdd\n+---------+\n|    value|\n+---------+\n|Invalid,I|\n|    One,1|\n|Eleven,11|\n|    Two,2|\n|  Three,3|\n|   Four,4|\n+---------+\n\nrddWhole\n+--------------------+---------------+\n|                  _1|             _2|\n+--------------------+---------------+\n|file:/Users/sadah...|      Invalid,I|\n|file:/Users/sadah...|One,1\nEleven,11|\n|file:/Users/sadah...|          Two,2|\n|file:/Users/sadah...|        Three,3|\n|file:/Users/sadah...|         Four,4|\n+--------------------+---------------+\n\nrdd3\n+-----+\n|value|\n+-----+\n|Two,2|\n+-----+\n\nrdd6\n+-------------------+\n|              value|\n+-------------------+\n|Col1:Invalid,Col2:I|\n|    Col1:One,Col2:1|\n|Col1:Eleven,Col2:11|\n|    Col1:Two,Col2:2|\n|  Col1:Three,Col2:3|\n|   Col1:Four,Col2:4|\n+-------------------+\n\nrdd7\n+-------+---+\n|     _1| _2|\n+-------+---+\n|Invalid|  I|\n|    One|  1|\n| Eleven| 11|\n|    Two|  2|\n|  Three|  3|\n|   Four|  4|\n+-------+---+\n\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/csv/* MapPartitionsRDD[540] at textFile at \u003cconsole\u003e:80\n\u001b[1m\u001b[34mrddWhole\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, String)]\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/csv/* MapPartitionsRDD[545] at wholeTextFiles at \u003cconsole\u003e:84\n\u001b[1m\u001b[34mrdd3\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/csv/text02.txt MapPartitionsRDD[550] at textFile at \u003cconsole\u003e:88\n\u001b[1m\u001b[34mrdd6\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Array[String]]\u001b[0m \u003d MapPartitionsRDD[554] at map at \u003cconsole\u003e:92\n\u001b[1m\u001b[34mrdd7\u001b[0m: \u001b[1m\u001b[3...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d223"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d224"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d225"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d226"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d227"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d228"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d229"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d230"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d231"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d232"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633759638775_1190742309",
+      "id": "paragraph_1633759638775_1190742309",
+      "dateCreated": "2021-10-09 15:07:18.778",
+      "dateStarted": "2021-10-09 18:21:22.047",
+      "dateFinished": "2021-10-09 18:21:28.219",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/spark-load-csv-file-into-rdd/\n\nprintln(\"rdd\")\nval rdd \u003d spark.sparkContext.textFile(csvDir + \"text01.txt\")\nrdd.toDF().show()\n\n// rm header\n// cannot rm in case of multi file rdd (like `textFile(csvDir + \"*\")`)\nprintln(\"rddWithoutFirstCol\")\nval rddWithoutFirstCol \u003d rdd.mapPartitionsWithIndex { (idx, iter) \u003d\u003e if (idx \u003d\u003d 0) iter.drop(1) else iter }\nrddWithoutFirstCol.toDF().show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 18:20:46.671",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "rdd\n+---------+\n|    value|\n+---------+\n|    One,1|\n|Eleven,11|\n+---------+\n\nrddWithoutFirstCol\n+---------+\n|    value|\n+---------+\n|Eleven,11|\n+---------+\n\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/csv/text01.txt MapPartitionsRDD[531] at textFile at \u003cconsole\u003e:76\n\u001b[1m\u001b[34mrddWithoutFirstCol\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d MapPartitionsRDD[535] at mapPartitionsWithIndex at \u003cconsole\u003e:82\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d219"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d220"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d221"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d222"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633759836791_1180840734",
+      "id": "paragraph_1633759836791_1180840734",
+      "dateCreated": "2021-10-09 15:10:36.793",
+      "dateStarted": "2021-10-09 18:20:46.683",
+      "dateFinished": "2021-10-09 18:20:50.630",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/different-ways-to-create-spark-rdd/\n\n// This method is used only for testing but not in realtime as the entire data will reside on one node which is not ideal for production.\nprintln(\"rdd\")\nval rdd \u003d spark.sparkContext.parallelize(Seq((\"Java\", 20000), (\"Python\", 100000), (\"Scala\", 3000)))\nrdd.toDF().show()\n\n// To convert DataSet or DataFrame to RDD just use rdd() method on any of these data types.\nprintln(\"myRdd2\")\nval myRdd2 \u003d spark.range(20).toDF().rdd\n\n// toDF() is not allowed in case of not Tuple rdd\n// myRdd2.toDF().show()\nspark.range(20).toDF().show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 18:20:33.796",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "rdd\n+------+------+\n|    _1|    _2|\n+------+------+\n|  Java| 20000|\n|Python|100000|\n| Scala|  3000|\n+------+------+\n\nmyRdd2\n+---+\n| id|\n+---+\n|  0|\n|  1|\n|  2|\n|  3|\n|  4|\n|  5|\n|  6|\n|  7|\n|  8|\n|  9|\n| 10|\n| 11|\n| 12|\n| 13|\n| 14|\n| 15|\n| 16|\n| 17|\n| 18|\n| 19|\n+---+\n\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d ParallelCollectionRDD[516] at parallelize at \u003cconsole\u003e:73\n\u001b[1m\u001b[34mmyRdd2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[org.apache.spark.sql.Row]\u001b[0m \u003d MapPartitionsRDD[525] at rdd at \u003cconsole\u003e:78\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d213"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d214"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d215"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d216"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d217"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d218"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633760806916_2087162858",
+      "id": "paragraph_1633760806916_2087162858",
+      "dateCreated": "2021-10-09 15:26:46.923",
+      "dateStarted": "2021-10-09 18:20:33.809",
+      "dateFinished": "2021-10-09 18:20:38.583",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/spark-how-to-create-an-empty-rdd/\nval rdd2 \u003d sc.parallelize(Seq.empty[String])\nval emptyRDD \u003d sc.parallelize(Seq(\"\"))\nvar resultRDD \u003d sc.emptyRDD[(String,Int)]",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 16:36:04.639",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mrdd2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d ParallelCollectionRDD[301] at parallelize at \u003cconsole\u003e:53\n\u001b[1m\u001b[34memptyRDD\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d ParallelCollectionRDD[302] at parallelize at \u003cconsole\u003e:54\n\u001b[1m\u001b[34mresultRDD\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d EmptyRDD[303] at emptyRDD at \u003cconsole\u003e:55\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633761093084_1357560898",
+      "id": "paragraph_1633761093084_1357560898",
+      "dateCreated": "2021-10-09 15:31:33.094",
+      "dateStarted": "2021-10-09 16:36:04.651",
+      "dateFinished": "2021-10-09 16:36:05.906",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/spark-rdd-transformations/\nimport org.apache.spark.rdd.RDD\n\nprintln(\"rdd\")\nval rdd:RDD[String] \u003d spark.sparkContext.textFile(csvDir + \"text01.txt\")\nrdd.toDF().show()\n\nprintln(\"rdd2\")\nval rdd2 \u003d rdd.flatMap(f\u003d\u003ef.split(\",\"))\nrdd2.toDF().show()\n\nprintln(\"rdd3\")\nval rdd3:RDD[(String,Int)]\u003d rdd2.map(m\u003d\u003e(m,1))\nrdd3.toDF().show()\n\nprintln(\"rdd4\")\nval rdd4 \u003d rdd3.filter(a\u003d\u003e a._1.startsWith(\"1\"))\nrdd4.toDF().show()\n\nprintln(\"rdd5\")\nval rddDup \u003d spark.sparkContext.parallelize(Seq((\"Java\", 20000), (\"Java\", 20000), (\"Java\", 30000), (\"Python\", 100000), (\"Scala\", 3000)))\nval rdd5 \u003d rddDup.reduceByKey(_ + _)\nrdd5.toDF().show()\n\nprintln(\"rdd6\")\nval rdd6 \u003d rdd5.map(a\u003d\u003e(a._2,a._1)).sortByKey()\nrdd6.toDF().show()\n\n// manually added\nprintln(\"rdd7\")\nval rdd7 \u003d rdd.union(rdd)\nrdd7.toDF().show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 18:26:50.761",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "rdd\n+---------+\n|    value|\n+---------+\n|    One,1|\n|Eleven,11|\n+---------+\n\nrdd2\n+------+\n| value|\n+------+\n|   One|\n|     1|\n|Eleven|\n|    11|\n+------+\n\nrdd3\n+------+---+\n|    _1| _2|\n+------+---+\n|   One|  1|\n|     1|  1|\n|Eleven|  1|\n|    11|  1|\n+------+---+\n\nrdd4\n+---+---+\n| _1| _2|\n+---+---+\n|  1|  1|\n| 11|  1|\n+---+---+\n\nrdd5\n+------+------+\n|    _1|    _2|\n+------+------+\n|  Java| 70000|\n|Python|100000|\n| Scala|  3000|\n+------+------+\n\nrdd6\n+------+------+\n|    _1|    _2|\n+------+------+\n|  3000| Scala|\n| 70000|  Java|\n|100000|Python|\n+------+------+\n\nrdd7\n+---------+\n|    value|\n+---------+\n|    One,1|\n|Eleven,11|\n|    One,1|\n|Eleven,11|\n+---------+\n\nimport org.apache.spark.rdd.RDD\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d /Users/sadahiroyoshi/Documents/apps/othergit/spark-scala-examples/src/main/resources/csv/text01.txt MapPartitionsRDD[637] at textFile at \u003cconsole\u003e:89\n\u001b[1m\u001b[34mrdd2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d MapPartitionsRDD[641] at flatMap at \u003cconsole\u003e:93\n\u001b[1m\u001b[34mrdd3\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d MapPartitionsRDD[645] at map at \u003cconsole\u003e:97\n\u001b[1m\u001b[34mrdd4\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d MapPartitionsRDD[649] at filter at \u003cconsole\u003e:101\n\u001b[1m\u001b[34mrddDup\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d ParallelCollectionRDD[653] at parallelize at \u003cconsole\u003e:105\n\u001b[1m\u001b[34mrdd5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(St...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d269"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d270"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d271"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d272"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d273"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d274"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d275"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d276"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d277"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d278"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d279"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d280"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d281"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d282"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d283"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d284"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d285"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633764954516_2087649199",
+      "id": "paragraph_1633764954516_2087649199",
+      "dateCreated": "2021-10-09 16:35:54.522",
+      "dateStarted": "2021-10-09 18:26:50.798",
+      "dateFinished": "2021-10-09 18:26:56.488",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/spark-rdd-actions/\n\nval inputRDD \u003d spark.sparkContext.parallelize(List((\"Z\", 1),(\"A\", 20),(\"B\", 30),(\"C\", 40),(\"B\", 30),(\"B\", 60)))\n\nval listRdd \u003d spark.sparkContext.parallelize(List(1,2,3,4,5,3,2))\n\n//aggregate\ndef param0\u003d (accu:Int, v:Int) \u003d\u003e accu + v\ndef param1\u003d (accu1:Int,accu2:Int) \u003d\u003e accu1 + accu2\nprintln(\"aggregate listRdd: \"+listRdd.aggregate(0)(param0,param1))\n\n//aggregate\ndef param3\u003d (accu:Int, v:(String,Int)) \u003d\u003e accu + v._2\ndef param4\u003d (accu1:Int,accu2:Int) \u003d\u003e accu1 + accu2\nprintln(\"aggregate inputRDD: \"+inputRDD.aggregate(0)(param3,param4))\n\n//treeAggregate. This is similar to aggregate\ndef param8\u003d (accu:Int, v:Int) \u003d\u003e accu + v\ndef param9\u003d (accu1:Int,accu2:Int) \u003d\u003e accu1 + accu2\nprintln(\"treeAggregate listRdd: \"+listRdd.treeAggregate(0)(param8,param9))\n\n//fold\nprintln(\"fold listRdd:  \"+listRdd.fold(0){ (acc,v) \u003d\u003e\nval sum \u003d acc+v\nsum\n})\nprintln(\"fold inputRDD:  \"+inputRDD.fold((\"Total\",0)){(acc:(String,Int),v:(String,Int))\u003d\u003e\nval sum \u003d acc._2 + v._2\n(\"Total\",sum)\n})\n\n//reduce\nprintln(\"reduce listRdd: \"+listRdd.reduce(_ + _))\nprintln(\"reduce alternate listRdd: \"+listRdd.reduce((x, y) \u003d\u003e x + y))\nprintln(\"reduce : inputRDD\"+inputRDD.reduce((x, y) \u003d\u003e (\"Total\",x._2 + y._2)))\n\n//Collect to Array\nval data:Array[Int] \u003d listRdd.collect()",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 18:58:37.358",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cconsole\u003e:125: \u001b[31merror: \u001b[0mvalue toDF is not a member of Array[Int]\n       data.toDF().show()\n            ^\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633769965615_2027451919",
+      "id": "paragraph_1633769965615_2027451919",
+      "dateCreated": "2021-10-09 17:59:25.637",
+      "dateStarted": "2021-10-09 18:58:27.738",
+      "dateFinished": "2021-10-09 18:58:28.849",
+      "status": "ERROR"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/spark-pair-rdd-functions/\n\nval rdd \u003d spark.sparkContext.parallelize(\n  List(\"Germany India USA\",\"USA India Russia\",\"India Brazil Canada China\")\n)\nrdd.toDF().show()\n\nval wordsRdd \u003d rdd.flatMap(_.split(\" \"))\nval pairRDD \u003d wordsRdd.map(f\u003d\u003e(f,1))\npairRDD.toDF().show()\n\nprintln(\"Distinct \u003d\u003d\u003e\")\npairRDD.distinct().toDF().show()\n\n//SortByKey\nprintln(\"Sort by Key \u003d\u003d\u003e\")\nval sortRDD \u003d pairRDD.sortByKey()\nsortRDD.toDF().show()\n\n//reduceByKey\nprintln(\"Reduce by Key \u003d\u003d\u003e\")\nval wordCount \u003d pairRDD.reduceByKey((a,b)\u003d\u003ea+b)\nwordCount.toDF().show()\n\ndef param1\u003d (accu:Int,v:Int) \u003d\u003e accu + v\ndef param2\u003d (accu1:Int,accu2:Int) \u003d\u003e accu1 + accu2\nprintln(\"Aggregate by Key \u003d\u003d\u003e wordcount\")\nval wordCount2 \u003d pairRDD.aggregateByKey(0)(param1,param2)\nwordCount2.toDF().show()\n\n//keys\nprintln(\"Keys \u003d\u003d\u003e\")\nwordCount2.keys.toDF().show()\n\n//values\nprintln(\"values \u003d\u003d\u003e\")\nwordCount2.values.toDF().show()\n\nprintln(\"Count :\"+wordCount2.count())\n\nprintln(\"collectAsMap \u003d\u003d\u003e\")\npairRDD.collectAsMap().foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 20:08:55.005",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+\n|               value|\n+--------------------+\n|   Germany India USA|\n|    USA India Russia|\n|India Brazil Cana...|\n+--------------------+\n\n+-------+---+\n|     _1| _2|\n+-------+---+\n|Germany|  1|\n|  India|  1|\n|    USA|  1|\n|    USA|  1|\n|  India|  1|\n| Russia|  1|\n|  India|  1|\n| Brazil|  1|\n| Canada|  1|\n|  China|  1|\n+-------+---+\n\nDistinct \u003d\u003d\u003e\n+-------+---+\n|     _1| _2|\n+-------+---+\n|    USA|  1|\n|  India|  1|\n|  China|  1|\n| Russia|  1|\n| Brazil|  1|\n| Canada|  1|\n|Germany|  1|\n+-------+---+\n\nSort by Key \u003d\u003d\u003e\n+-------+---+\n|     _1| _2|\n+-------+---+\n| Brazil|  1|\n| Canada|  1|\n|  China|  1|\n|Germany|  1|\n|  India|  1|\n|  India|  1|\n|  India|  1|\n| Russia|  1|\n|    USA|  1|\n|    USA|  1|\n+-------+---+\n\nReduce by Key \u003d\u003d\u003e\n+-------+---+\n|     _1| _2|\n+-------+---+\n|    USA|  2|\n|Germany|  1|\n| Russia|  1|\n| Brazil|  1|\n| Canada|  1|\n|  China|  1|\n|  India|  3|\n+-------+---+\n\nAggregate by Key \u003d\u003d\u003e wordcount\n+-------+---+\n|     _1| _2|\n+-------+---+\n|    USA|  2|\n|Germany|  1|\n| Russia|  1|\n| Brazil|  1|\n| Canada|  1|\n|  China|  1|\n|  India|  3|\n+-------+---+\n\nKeys \u003d\u003d\u003e\n+-------+\n|  value|\n+-------+\n|    USA|\n|Germany|\n| Russia|\n| Brazil|\n| Canada|\n|  China|\n|  India|\n+-------+\n\nvalues \u003d\u003d\u003e\n+-----+\n|value|\n+-----+\n|    2|\n|    1|\n|    1|\n|    1|\n|    1|\n|    1|\n|    3|\n+-----+\n\nCount :7\ncollectAsMap \u003d\u003d\u003e\n(Brazil,1)\n(Canada,1)\n(Germany,1)\n(China,1)\n(Russia,1)\n(India,1)\n(USA,1)\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d ParallelCollectionRDD[767] at parallelize at \u003cconsole\u003e:86\n\u001b[1m\u001b[34mwordsRdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d MapPartitionsRDD[771] at flatMap at \u003cconsole\u003e:91\n\u001b[1m\u001b[34mpairRDD\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d MapPartitionsRDD[772] at map at \u003cconsole\u003e:92\n\u001b[1m\u001b[34msortRDD\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d ShuffledRDD[784] at sortByKey at \u003cconsole\u003e:100\n\u001b[1m\u001b[34mwordCount\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d ShuffledRDD[788] at reduceByKey at \u003cconsole\u003e:105\n\u001b[1m\u001b[34mparam1\u001b[0m: \u001b[1m\u001b[32m(Int, Int) \u003d\u003e Int\u001b[0m\n\u001b[1m\u001b[34mparam2\u001b[0m: \u001b[1m\u001b[32m(Int, Int) \u003d\u003e Int\u001b[0m\n\u001b[1m\u001b[34mwordCount2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d372"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d373"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d374"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d375"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d376"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d377"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d378"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d379"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d380"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d381"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d382"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d383"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d384"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d385"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d386"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d387"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d388"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d389"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d390"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d391"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d392"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d393"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d394"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d395"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d396"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d397"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d398"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633771770086_1806976009",
+      "id": "paragraph_1633771770086_1806976009",
+      "dateCreated": "2021-10-09 18:29:30.098",
+      "dateStarted": "2021-10-09 20:08:55.027",
+      "dateFinished": "2021-10-09 20:09:06.886",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-repartition-vs-coalesce/\nimport java.io._\nimport java.nio.file._\nimport scala.io.Source\nimport org.apache.spark.rdd.RDD\n\ndef saveAndPrintFiles(rdd: RDD[Int], outputDir: String) {\n    val path \u003d Paths.get(outputDir)\n    if (Files.exists(path)) {\n        Files.list(path).forEach(Files.deleteIfExists)\n        Files.delete(path)\n    }\n\n    rdd.saveAsTextFile(outputDir)\n\n    Files.list(path).sorted.forEach{ p \u003d\u003e\n        if (!p.toString().endsWith(\".crc\")) {\n            println(p.getFileName())\n            for (line \u003c- Source.fromFile(p.toString()).getLines) {\n              println(line)\n            }\n        }\n    }\n}\n\nval rdd \u003d spark.sparkContext.parallelize(Range(0,20))\nprintln(\"From local[5] : \"+rdd.partitions.size)\nsaveAndPrintFiles(rdd, storageDir + \"/tmp/repartition-vs-coalesce/rdd/\")\n\nval rdd1 \u003d spark.sparkContext.parallelize(Range(0,25), 6)\nprintln(\"parallelize : \"+rdd1.partitions.size)\nsaveAndPrintFiles(rdd1, storageDir + \"/tmp/repartition-vs-coalesce/rdd1/\")\n\nval rdd2 \u003d rdd1.repartition(4)\nprintln(\"repartition : \"+rdd2.partitions.size)\nsaveAndPrintFiles(rdd2, storageDir + \"/tmp/repartition-vs-coalesce/rdd2/\")\n\nval rdd3 \u003d rdd1.coalesce(4)\nprintln(\"coalesce : \"+rdd3.partitions.size)\nsaveAndPrintFiles(rdd3, storageDir + \"/tmp/repartition-vs-coalesce/rdd3/\")\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 21:08:25.510",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "From local[5] : 8\n_SUCCESS\npart-00000\n0\n1\npart-00001\n2\n3\n4\npart-00002\n5\n6\npart-00003\n7\n8\n9\npart-00004\n10\n11\npart-00005\n12\n13\n14\npart-00006\n15\n16\npart-00007\n17\n18\n19\nparallelize : 6\n_SUCCESS\npart-00000\n0\n1\n2\n3\npart-00001\n4\n5\n6\n7\npart-00002\n8\n9\n10\n11\npart-00003\n12\n13\n14\n15\npart-00004\n16\n17\n18\n19\npart-00005\n20\n21\n22\n23\n24\nrepartition : 4\n_SUCCESS\npart-00000\n1\n7\n8\n12\n18\n23\npart-00001\n2\n4\n9\n13\n19\n20\n24\npart-00002\n3\n5\n10\n14\n16\n21\npart-00003\n0\n6\n11\n15\n17\n22\ncoalesce : 4\n_SUCCESS\npart-00000\n0\n1\n2\n3\npart-00001\n4\n5\n6\n7\n8\n9\n10\n11\npart-00002\n12\n13\n14\n15\npart-00003\n16\n17\n18\n19\n20\n21\n22\n23\n24\nimport java.io._\nimport java.nio.file._\nimport scala.io.Source\nimport org.apache.spark.rdd.RDD\n\u001b[1m\u001b[34msaveAndPrintFiles\u001b[0m: \u001b[1m\u001b[32m(rdd: org.apache.spark.rdd.RDD[Int], outputDir: String)Unit\u001b[0m\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Int]\u001b[0m \u003d ParallelCollectionRDD[933] at parallelize at \u003cconsole\u003e:181\n\u001b[1m\u001b[34mrdd1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Int]\u001b[0m \u003d ParallelCollectionRDD[935] at parallelize at \u003cconsole\u003e:185\n\u001b[1m\u001b[34mrdd2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Int]\u001b[0m \u003d MapPartitionsRDD[940] at repartition at \u003cconsole\u003e:189\n\u001b[1m\u001b[34mrdd3\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Int]\u001b[0m \u003d CoalescedRDD[942] at coalesce at \u003cconsole\u003e:193\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d419"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d420"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d421"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d422"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633777507985_143184841",
+      "id": "paragraph_1633777507985_143184841",
+      "dateCreated": "2021-10-09 20:05:08.000",
+      "dateStarted": "2021-10-09 21:08:25.537",
+      "dateFinished": "2021-10-09 21:08:29.887",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-shuffle-partitions/\n\nimport spark.implicits._\n\nval simpleData \u003d Seq((\"James\",\"Sales\",\"NY\",90000,34,10000),\n    (\"Michael\",\"Sales\",\"NY\",86000,56,20000),\n    (\"Robert\",\"Sales\",\"CA\",81000,30,23000),\n    (\"Maria\",\"Finance\",\"CA\",90000,24,23000),\n    (\"Raman\",\"Finance\",\"CA\",99000,40,24000),\n    (\"Scott\",\"Finance\",\"NY\",83000,36,19000),\n    (\"Jen\",\"Finance\",\"NY\",79000,53,15000),\n    (\"Jeff\",\"Marketing\",\"CA\",80000,25,18000),\n    (\"Kumar\",\"Marketing\",\"NY\",91000,50,21000)\n  )\nval df \u003d simpleData.toDF(\"employee_name\",\"department\",\"state\",\"salary\",\"age\",\"bonus\")\n\nspark.conf.set(\"spark.sql.shuffle.partitions\",200)\nval df2 \u003d df.groupBy(\"state\").count()\nprintln(df2.rdd.getNumPartitions)\n\nspark.conf.set(\"spark.sql.shuffle.partitions\",100)\nprintln(df.groupBy(\"employee_name\").count().rdd.partitions.length)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 21:17:44.602",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "200\n100\nimport spark.implicits._\n\u001b[1m\u001b[34msimpleData\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String, String, Int, Int, Int)]\u001b[0m \u003d List((James,Sales,NY,90000,34,10000), (Michael,Sales,NY,86000,56,20000), (Robert,Sales,CA,81000,30,23000), (Maria,Finance,CA,90000,24,23000), (Raman,Finance,CA,99000,40,24000), (Scott,Finance,NY,83000,36,19000), (Jen,Finance,NY,79000,53,15000), (Jeff,Marketing,CA,80000,25,18000), (Kumar,Marketing,NY,91000,50,21000))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [employee_name: string, department: string ... 4 more fields]\n\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [state: string, count: bigint]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633778254181_1375043312",
+      "id": "paragraph_1633778254181_1375043312",
+      "dateCreated": "2021-10-09 20:17:34.195",
+      "dateStarted": "2021-10-09 21:17:44.614",
+      "dateFinished": "2021-10-09 21:17:47.857",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-broadcast-variables/\n\nval states \u003d Map((\"NY\",\"New York\"),(\"CA\",\"California\"),(\"FL\",\"Florida\"))\nval countries \u003d Map((\"USA\",\"United States of America\"),(\"IN\",\"India\"))\n\nval broadcastStates \u003d spark.sparkContext.broadcast(states)\nval broadcastCountries \u003d spark.sparkContext.broadcast(countries)\n\nval data \u003d Seq((\"James\",\"Smith\",\"USA\",\"CA\"),\n(\"Michael\",\"Rose\",\"USA\",\"NY\"),\n(\"Robert\",\"Williams\",\"USA\",\"CA\"),\n(\"Maria\",\"Jones\",\"USA\",\"FL\")\n)\n\nval rdd \u003d spark.sparkContext.parallelize(data)\n\nval rdd2 \u003d rdd.map(f\u003d\u003e{\nval country \u003d f._3\nval state \u003d f._4\nval fullCountry \u003d broadcastCountries.value.get(country).get\nval fullState \u003d broadcastStates.value.get(state).get\n(f._1,f._2,fullCountry,fullState)\n})\n\nprintln(rdd2.collect().mkString(\"\\n\"))",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 22:06:09.875",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(James,Smith,United States of America,California)\n(Michael,Rose,United States of America,New York)\n(Robert,Williams,United States of America,California)\n(Maria,Jones,United States of America,Florida)\n\u001b[1m\u001b[34mstates\u001b[0m: \u001b[1m\u001b[32mscala.collection.immutable.Map[String,String]\u001b[0m \u003d Map(NY -\u003e New York, CA -\u003e California, FL -\u003e Florida)\n\u001b[1m\u001b[34mcountries\u001b[0m: \u001b[1m\u001b[32mscala.collection.immutable.Map[String,String]\u001b[0m \u003d Map(USA -\u003e United States of America, IN -\u003e India)\n\u001b[1m\u001b[34mbroadcastStates\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.broadcast.Broadcast[scala.collection.immutable.Map[String,String]]\u001b[0m \u003d Broadcast(540)\n\u001b[1m\u001b[34mbroadcastCountries\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.broadcast.Broadcast[scala.collection.immutable.Map[String,String]]\u001b[0m \u003d Broadcast(541)\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String, String, String)]\u001b[0m \u003d List((James,Smith,USA,CA), (Michael,Rose,USA,NY), (Robert,Williams,USA,CA), (Maria,Jones,USA,FL))\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Strin...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d423"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633784755215_1854544335",
+      "id": "paragraph_1633784755215_1854544335",
+      "dateCreated": "2021-10-09 22:05:55.222",
+      "dateStarted": "2021-10-09 22:06:09.899",
+      "dateFinished": "2021-10-09 22:06:13.695",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/spark/spark-accumulators/\n\nval longAcc \u003d spark.sparkContext.longAccumulator(\"SumAccumulator\")\n\nval rdd \u003d spark.sparkContext.parallelize(Array(1, 2, 3))\n\nrdd.foreach(x \u003d\u003e longAcc.add(x))\nprintln(longAcc.value)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 22:12:56.869",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "6\n\u001b[1m\u001b[34mlongAcc\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.util.LongAccumulator\u001b[0m \u003d LongAccumulator(id: 13649, name: Some(SumAccumulator), value: 6)\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Int]\u001b[0m \u003d ParallelCollectionRDD[1018] at parallelize at \u003cconsole\u003e:174\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d424"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633781794389_509223392",
+      "id": "paragraph_1633781794389_509223392",
+      "dateCreated": "2021-10-09 21:16:34.400",
+      "dateStarted": "2021-10-09 22:12:56.890",
+      "dateFinished": "2021-10-09 22:13:00.083",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// https://sparkbyexamples.com/apache-spark-rdd/convert-spark-rdd-to-dataframe-dataset/\n// https://sparkbyexamples.com/spark/spark-sql-structtype-on-dataframe/\n\nimport spark.implicits._\nimport org.apache.spark.rdd._\nimport org.apache.spark.sql.types._\nimport org.apache.spark.sql.Row\n\nval columns \u003d Seq(\"language\",\"users_count\")\nval data \u003d Seq((\"Java\", \"20000\"), (\"Python\", \"100000\"), (\"Scala\", \"3000\"))\nval rdd \u003d spark.sparkContext.parallelize(data)\n\nprintln(\"dfFromRDD1\")\nval dfFromRDD1 \u003d rdd.toDF()\ndfFromRDD1.printSchema()\n\nprintln(\"dfFromRDD1WithCols\")\nval dfFromRDD1WithCols \u003d rdd.toDF(\"language\",\"users_count\")\ndfFromRDD1WithCols.printSchema()\n\nprintln(\"dfFromRDD2\")\nval columns2 \u003d Seq(\"language\",\"users_count\")\nval dfFromRDD2 \u003d spark.createDataFrame(rdd).toDF(columns2:_*)\ndfFromRDD2.show()\n\n//From RDD (USING createDataFrame and Adding schema using StructType)\nval schema \u003d StructType(columns\n  .map(fieldName \u003d\u003e StructField(fieldName, StringType, nullable \u003d true)))\n//convert RDD[T] to RDD[Row]\nval rowRDD \u003d rdd.map(attributes \u003d\u003e Row(attributes._1, attributes._2))\nval dfFromRDD3 \u003d spark.createDataFrame(rowRDD,schema)\ndfFromRDD3.show()\n\nval ds \u003d spark.createDataset(rdd)\nds.show()\n\nval simpleData \u003d Seq(Row(\"James \",\"\",\"Smith\",\"36636\",\"M\",3000),\n    Row(\"Michael \",\"Rose\",\"\",\"40288\",\"M\",4000),\n    Row(\"Robert \",\"\",\"Williams\",\"42114\",\"M\",4000),\n    Row(\"Maria \",\"Anne\",\"Jones\",\"39192\",\"F\",4000),\n    Row(\"Jen\",\"Mary\",\"Brown\",\"\",\"F\",-1)\n  )\n\nval simpleSchema \u003d StructType(Array(\n    StructField(\"firstname\",StringType,true),\n    StructField(\"middlename\",StringType,true),\n    StructField(\"lastname\",StringType,true),\n    StructField(\"id\", StringType, true),\n    StructField(\"gender\", StringType, true),\n    StructField(\"salary\", IntegerType, true)\n  ))\n\nval df \u003d spark.createDataFrame(\n  spark.sparkContext.parallelize(simpleData),simpleSchema)\ndf.printSchema()\ndf.show()\n\nval arrayStructureData \u003d Seq(\n    Row(Row(\"James \",\"\",\"Smith\"),List(\"Cricket\",\"Movies\"),Map(\"hair\"-\u003e\"black\",\"eye\"-\u003e\"brown\")),\n    Row(Row(\"Michael \",\"Rose\",\"\"),List(\"Tennis\"),Map(\"hair\"-\u003e\"brown\",\"eye\"-\u003e\"black\")),\n    Row(Row(\"Robert \",\"\",\"Williams\"),List(\"Cooking\",\"Football\"),Map(\"hair\"-\u003e\"red\",\"eye\"-\u003e\"gray\")),\n    Row(Row(\"Maria \",\"Anne\",\"Jones\"),null,Map(\"hair\"-\u003e\"blond\",\"eye\"-\u003e\"red\")),\n    Row(Row(\"Jen\",\"Mary\",\"Brown\"),List(\"Blogging\"),Map(\"white\"-\u003e\"black\",\"eye\"-\u003e\"black\"))\n)\n\nval arrayStructureSchema \u003d new StructType()\n.add(\"name\",new StructType()\n  .add(\"firstname\",StringType)\n  .add(\"middlename\",StringType)\n  .add(\"lastname\",StringType))\n.add(\"hobbies\", ArrayType(StringType))\n.add(\"properties\", MapType(StringType,StringType))\n\nval df5 \u003d spark.createDataFrame(\n spark.sparkContext.parallelize(arrayStructureData),arrayStructureSchema)\ndf5.printSchema()\ndf5.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 22:21:59.302",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "dfFromRDD1\nroot\n |-- _1: string (nullable \u003d true)\n |-- _2: string (nullable \u003d true)\n\ndfFromRDD1WithCols\nroot\n |-- language: string (nullable \u003d true)\n |-- users_count: string (nullable \u003d true)\n\ndfFromRDD2\n+--------+-----------+\n|language|users_count|\n+--------+-----------+\n|    Java|      20000|\n|  Python|     100000|\n|   Scala|       3000|\n+--------+-----------+\n\n+--------+-----------+\n|language|users_count|\n+--------+-----------+\n|    Java|      20000|\n|  Python|     100000|\n|   Scala|       3000|\n+--------+-----------+\n\n+------+------+\n|    _1|    _2|\n+------+------+\n|  Java| 20000|\n|Python|100000|\n| Scala|  3000|\n+------+------+\n\nroot\n |-- firstname: string (nullable \u003d true)\n |-- middlename: string (nullable \u003d true)\n |-- lastname: string (nullable \u003d true)\n |-- id: string (nullable \u003d true)\n |-- gender: string (nullable \u003d true)\n |-- salary: integer (nullable \u003d true)\n\n+---------+----------+--------+-----+------+------+\n|firstname|middlename|lastname|   id|gender|salary|\n+---------+----------+--------+-----+------+------+\n|   James |          |   Smith|36636|     M|  3000|\n| Michael |      Rose|        |40288|     M|  4000|\n|  Robert |          |Williams|42114|     M|  4000|\n|   Maria |      Anne|   Jones|39192|     F|  4000|\n|      Jen|      Mary|   Brown|     |     F|    -1|\n+---------+----------+--------+-----+------+------+\n\nroot\n |-- name: struct (nullable \u003d true)\n |    |-- firstname: string (nullable \u003d true)\n |    |-- middlename: string (nullable \u003d true)\n |    |-- lastname: string (nullable \u003d true)\n |-- hobbies: array (nullable \u003d true)\n |    |-- element: string (containsNull \u003d true)\n |-- properties: map (nullable \u003d true)\n |    |-- key: string\n |    |-- value: string (valueContainsNull \u003d true)\n\n+--------------------+-------------------+--------------------+\n|                name|            hobbies|          properties|\n+--------------------+-------------------+--------------------+\n|   {James , , Smith}|  [Cricket, Movies]|{hair -\u003e black, e...|\n|  {Michael , Rose, }|           [Tennis]|{hair -\u003e brown, e...|\n|{Robert , , Willi...|[Cooking, Football]|{hair -\u003e red, eye...|\n|{Maria , Anne, Jo...|               null|{hair -\u003e blond, e...|\n|  {Jen, Mary, Brown}|         [Blogging]|{white -\u003e black, ...|\n+--------------------+-------------------+--------------------+\n\nimport spark.implicits._\nimport org.apache.spark.rdd._\nimport org.apache.spark.sql.types._\nimport org.apache.spark.sql.Row\n\u001b[1m\u001b[34mcolumns\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(language, users_count)\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String)]\u001b[0m \u003d List((Java,20000), (Python,100000), (Scala,3000))\n\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, String)]\u001b[0m \u003d ParallelCollectionRDD[1034] at parallelize at \u003cconsole\u003e:203\n\u001b[1m\u001b[34mdfFromRDD1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [_1: string, _2: string]\n\u001b[1m\u001b[34mdfFromRDD1WithCols\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [language: string, users_count: string]\n\u001b[1m\u001b[34mcolumns2\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(language, users_count)\n\u001b[1m\u001b[34mdfFromRDD2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFra...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d437"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d438"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d439"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d440"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d441"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d442"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d443"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d444"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d445"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d446"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d447"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d448"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d449"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d450"
+            },
+            {
+              "jobUrl": "http://192.168.0.29:4040/jobs/job?id\u003d451"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633785176883_706229703",
+      "id": "paragraph_1633785176883_706229703",
+      "dateCreated": "2021-10-09 22:12:56.890",
+      "dateStarted": "2021-10-09 22:21:59.317",
+      "dateFinished": "2021-10-09 22:22:10.700",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633785342240_512419922",
+      "id": "paragraph_1633785342240_512419922",
+      "dateCreated": "2021-10-09 22:15:42.243",
+      "status": "READY"
+    }
+  ],
+  "name": "Spark RDD Tutorial",
+  "id": "2GH9VB9GA",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
